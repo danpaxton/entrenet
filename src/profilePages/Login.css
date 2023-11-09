@@ -1,0 +1,34 @@
+body  {
+    background: whitesmoke;
+}
+
+.login-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 600px;
+    width: 100%;
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 200px;
+    width: 300px;
+    border-radius: 5px;
+    padding: 10px;
+    border: solid lightgray;
+    background: white;
+ }
+
+.login-text {
+    font-weight: bolder;
+    font-size: larger;
+    padding: 5px;
+}
+
+.login-help {
+    font-weight: bold;
+}

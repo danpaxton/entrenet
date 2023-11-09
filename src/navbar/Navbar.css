@@ -1,0 +1,37 @@
+.nav-bar {
+    display: flex;
+    width: 100%;
+    background: black;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-menu {
+    display: flex;
+    justify-content: left;
+    font-size: medium;
+}
+
+.nav-item {
+    color: white;
+    text-decoration: none;
+    padding: 20px;
+}
+
+.profile-nav {
+    color: black;
+    text-decoration: none;
+}
+
+.profile {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.profile-icon, .nav-item:focus {
+    color: lightblue;
+    text-decoration: none
+}
+
+.profile-icon:hover, .nav-item:hover {
+    color: gray
+}
