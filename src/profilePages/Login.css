@@ -15,20 +15,34 @@ body  {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 200px;
-    width: 300px;
+    width: 450px;
     border-radius: 5px;
     padding: 10px;
     border: solid lightgray;
     background: white;
  }
 
-.login-text {
+.login-header {
     font-weight: bolder;
-    font-size: larger;
+    font-size: x-large;
     padding: 5px;
 }
 
-.login-help {
-    font-weight: bold;
+.login-name {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 10px;
+}
+
+.login-text {
+    background: whitesmoke;
+}
+
+.login-label {
+    padding-bottom: 5px;
+}
+
+.text-padding {
+    padding-bottom: 10px;
 }

@@ -32,6 +32,20 @@
     text-decoration: none
 }
 
+.profile-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-weight: bold;
+}
+
+.user-email {
+    font-size: small;
+    color: gray;
+}
+
 .profile-icon:hover, .nav-item:hover {
     color: gray
 }

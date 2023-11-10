@@ -4,28 +4,42 @@ import { Box, TextField, Button } from '@mui/material'
 import './Login.css'
  
 const Login = (props) => {
-    const { username, setUsername, setToken } = props
+    const { login, setLogin } = props
 
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
 
     const handleJoin = () => {
-        setToken("token");
-        navigate('/home')
-        console.log(username, password)
+        setLogin({...login, token: "token" });
+        navigate('/home');
+        console.log(login.email, password);
+    }
+
+    const handleName = attr => name => {
+        login[attr] = name.target.value;
+        setLogin(login);
+    }
+    
+    const handlePassword = pass => {
+        setPassword(pass.target.value);
     }
 
     return (
         <Box className="login-page">
-            <Box className="login-text">Find your entrepreneurial success.</Box>
+            <Box className="login-header">Create your entrepreneurial success.</Box>
             <Box className="login">
-                <Box>
-                    <Box className="login-help">Email</Box>
-                    <TextField onChange={t => setUsername(t.target.value)} fullWidth size='small'></TextField>
+                <Box className="login-label">Name</Box>
+                <Box className="login-name">
+                    <TextField onChange={handleName('first')} className='login-text' placeholder={"First"} fullWidth size='small'></TextField>
+                    <TextField onChange={handleName('last')} className='login-text' placeholder={"Last"} fullWidth size='small'></TextField>
                 </Box>
-                <Box>
-                    <Box className="login-help">Password</Box>
-                    <TextField onChange={t => setPassword(t.target.value)} fullWidth size='small'></TextField>    
+                <Box className="text-padding">
+                    <Box className="login-label">E-mail</Box>
+                    <TextField className='login-text' onChange={handleName('email')} fullWidth size='small'></TextField>
+                </Box>
+                <Box className="text-padding">
+                    <Box className="login-label">Password</Box>
+                    <TextField className='login-text' onChange={handlePassword} fullWidth size='small'></TextField>    
                 </Box>
                 <Button onClick={handleJoin} variant='contained'>
                     Join

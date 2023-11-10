@@ -15,30 +15,21 @@ import Settings from './profilePages/Settings'
 import Login from './profilePages/Login'
 
 function App() {
-  const [username, setUsername] = useState("")
-  const [token, setToken] = useState('')
+  const [login, setLogin] = useState({ first: "", last: "", username: "", token: "" })
 
   return (
     <Router>
-      <Navbar username={username} token={token} setToken={setToken} />
+      <Navbar login={login} setLogin={setLogin} />
         <Routes>
           <Route exact path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
           <Route path='/resources' element={<Resources />} />
           <Route path='/blogs' element={<Blogs />} />
           <Route path='/forums' element={<Forums />} />
-          <Route path='/contact' element={<Contact />} />
+          <Route path='/contact' element={<Contact login={login} setLogin={setLogin} />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/settings' element={<Settings />} />
-          <Route path='/login' element={
-            <Login 
-              username={username} 
-              setUsername={setUsername} 
-              token={token} 
-              setToken={setToken} 
-              />
-              } 
-            />
+          <Route path='/login' element={ <Login login={login} setLogin={setLogin} />}/>
       </Routes>
   </Router>
   )
