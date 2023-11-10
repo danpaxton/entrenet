@@ -26,19 +26,19 @@ const Navbar = (props) => {
     const handleNav = page => () => {
         handleClose()
         navigate(page)
-    }
+    };
 
     const handleLogout = () => {
         setLogin({ first: "", last: "", username: "", token: "" });
         handleNav('/login')()
-    }
+    };
 
     const formatName = (first, last) => {
         const a = first.charAt(0).toUpperCase()
         const b = last.charAt(0).toUpperCase()
 
         return a + first.substring(1) + ' ' + b + last.substring(1)
-    }
+    };
 
     return (
         <>

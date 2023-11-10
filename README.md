@@ -10,7 +10,7 @@ git clone https://github.com/danpaxton/entrenet.git
 
 Navigate to directory.
 ```
-cd entrenet
+cd entrenet/client
 ```
 
 Install dependencies and run client. To install npm visit https://github.com/nvm-sh/nvm#installing-and-updating
