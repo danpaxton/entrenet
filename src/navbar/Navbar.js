@@ -1,24 +1,31 @@
 import './Navbar.css'
 import { useState } from "react";
 import { NavLink } from "react-router-dom"
-import { Box, Button, IconButton, Menu, MenuItem, ListItemIcon } from '@mui/material'
+import { Box, IconButton, Menu, MenuItem, ListItemIcon } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AccountBox from '@mui/icons-material/AccountCircle';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 
 
-const Navbar = () => {
-    const [profile, setProfile] = useState("sample@mail.com")
-    const [token, setToken] = useState('')
+const Navbar = (props) => {
+    const { token, setToken } = props
+    
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
     };
+
     const handleClose = () => {
-      setAnchorEl(null);
+        setAnchorEl(null);
     };
+
+    const handleLogout = () => {
+        setAnchorEl(null);
+        setToken('')
+    }
 
     return (
         <>
@@ -51,7 +58,7 @@ const Navbar = () => {
                     }
                 </Box>
                 <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-                    <MenuItem divider onClick={handleClose}>{profile}</MenuItem>
+                    <MenuItem divider onClick={handleClose}>{props.username}</MenuItem>
                     <MenuItem onClick={handleClose}>
                         <ListItemIcon><AccountBox fontSize="small"/></ListItemIcon>
                             <NavLink to="/profile" className="profile-nav">Profile</NavLink>
@@ -60,7 +67,7 @@ const Navbar = () => {
                         <ListItemIcon><Settings fontSize="small"/></ListItemIcon>
                             <NavLink to="/settings" className="profile-nav">Settings</NavLink>
                     </MenuItem>
-                    <MenuItem onClick={handleClose}>
+                    <MenuItem onClick={handleLogout}>
                         <ListItemIcon><Logout fontSize="small"/></ListItemIcon>
                           <NavLink to="/login" className="profile-nav">Logout</NavLink>
                     </MenuItem>
