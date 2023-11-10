@@ -6,7 +6,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AccountBox from '@mui/icons-material/AccountCircle';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
-
+import logo from '../logo.png'
 
 const Navbar = (props) => {
     const { login, setLogin } = props
@@ -44,6 +44,7 @@ const Navbar = (props) => {
         <>
             <Box className="nav-bar">
                 <Box className="nav-menu">
+                <img className="logo" src={logo} />
                     <NavLink to="/" className="nav-item">
                         HOME
                     </NavLink>
