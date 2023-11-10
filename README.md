@@ -1,6 +1,6 @@
-### EntreNet
+# EntreNet
 
-# Client
+## Client
 To view the client in the web browser use these commands in the terminal.
 
 Clone repository.
