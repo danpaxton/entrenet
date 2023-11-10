@@ -13,7 +13,7 @@ Navigate to directory.
 cd entrenet
 ```
 
-Install and run node package manager.
+Install dependencies and run client. To install npm visit https://github.com/nvm-sh/nvm#installing-and-updating
 ```
 npm install
 npm run start
