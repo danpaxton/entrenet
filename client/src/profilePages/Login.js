@@ -26,7 +26,7 @@ const Login = (props) => {
 
     return (
         <Box className="login-page">
-            <Box className="login-header">Create your entrepreneurial success.</Box>
+            <Box className="login-header">Your gateway to entrepreneurial success.</Box>
             <Box className="login">
                 <Box className="login-label">Name</Box>
                 <Box className="login-name">

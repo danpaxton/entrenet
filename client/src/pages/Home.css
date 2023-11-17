@@ -3,58 +3,36 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
 }
 
-.entrenet-header {
-    font-size: larger;
-    font-weight: bold;
-    color: black;
-}
-
-.vision-text {
-    font-size: medium;
-    color: black;
-}
-
-/* Slideshow */
-
-.slideshow {
-    margin: 0 auto;
-    overflow: hidden;
-    height: 100%;
-    width: 100%;
-}
-  
-.slideshowSlider {
-    white-space: nowrap;
-    transition: ease 1000ms;
-}
-
-.slide {
-    display: inline-block;
-    height: 500px;
-    width: 100%;
-    border-radius: 40px;
-}
-
-/* Buttons */
-
-.slideshowDots {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+.slide-item {
     padding: 10px;
 }
 
-.slideshowDot {
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    cursor: pointer;
-    background-color: lightgray;
+.entrenet-header {
+    font-size: xx-large;
+    font-weight: bold;
+    color: black;
+    padding: 20px;
 }
-  
-.slideshowDot.active {
-    background-color: black;
+
+.vision-text {
+    font-size: larger;
+    color: black;
+    text-align: center;
+    width: 800px;
+    border-top: solid gray;
+    padding: 20px;
+}
+
+.resource-button {
+    border: solid black;
+    border-radius: 5px;
+    font-size: medium;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.resource-button:hover {
+    background: lightgray;
 }

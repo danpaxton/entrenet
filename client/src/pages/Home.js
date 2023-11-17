@@ -1,53 +1,19 @@
-import { useState, useEffect, useRef } from 'react';
 import { Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import "./Home.css";
 
-const colors = ["#0088FE", "#00C49F", "#FFBB28"];
-const delay = 2500;
-
 const Home = () => {
-    const [index, setIndex] = useState(0);
-    const timeoutRef = useRef(null);
-
-    function resetTimeout() {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    }
-  
-    useEffect(() => {
-      resetTimeout();
-      timeoutRef.current = setTimeout(
-        () => setIndex((prevIndex) => (prevIndex + 1) % colors.length), delay
-      );
-  
-      return () => {
-        resetTimeout();
-      };
-    }, [index]);
-  
+    const navigate = useNavigate();
 
     return (
         <Box className="home-page">
-            <Box className="entrenet-header">EntreNet</Box>
-            <Box className="vision-text">
-                The platform aims to serve as a central hub where entrepreneurs can learn, connect, access
-                resources, and secure funding to turn their entrepreneurial visions into successful ventures.
-            </Box>
-            <Box className="slideshow">
-                <Box className="slideshowSlider" style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
-                    {colors.map((backgroundColor, index) => (
-                    <Box className="slide" key={index} style={{ backgroundColor }}></Box>
-                    ))}
-                </Box>
-                <Box className="slideshowDots">
-                    {colors.map((_, idx) => (
-                    <Box key={idx} className={`slideshowDot${index === idx ? " active" : ""}`} 
-                        onClick={() => { setIndex(idx); }}></Box>))}
-                </Box>
-            </Box>
+            <Box className="entrenet-header">Welcome to EntreNet.</Box>
+            <Box className="vision-text">&emsp;EntreNet is a dynamic organization committed to bridging the gap between aspiring entrepreneurs and the resources they need to thrive in the ever-evolving world of business. Our mission is to empower entrepreneurs with the knowledge, mentorship, and networking opportunities necessary for their success. Our ultimate goal is to become the go-to platform for entrepreneurs across the world. Through our virtual events, mentorship programs, and connections to top investors, we aim to equip the next generation of business leaders with the skills and experiences they need to excel in the entrepreneurial landscape.</Box>
+            <Box className="resource-button" onClick={() => navigate('/resources')}>Visit Resource Hub</Box>
+            <Box className="slide-item"></Box>
+            <Box className="slide-item"></Box>
         </Box>
     );
 };
- 
+
 export default Home;
