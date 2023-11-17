@@ -21,7 +21,7 @@ function App() {
     <Router>
       <Navbar login={login} setLogin={setLogin} />
         <Routes>
-          <Route exact path='/' element={<Home />} />
+          <Route exact path='/home' element={<Home />} />
           <Route path='/about' element={<About />} />
           <Route path='/resources' element={<Resources />} />
           <Route path='/blogs' element={<Blogs />} />

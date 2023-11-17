@@ -33,19 +33,12 @@ const Navbar = (props) => {
         handleNav('/login')()
     };
 
-    const formatName = (first, last) => {
-        const a = first.charAt(0).toUpperCase()
-        const b = last.charAt(0).toUpperCase()
-
-        return a + first.substring(1) + ' ' + b + last.substring(1)
-    };
-
     return (
         <>
             <Box className="nav-bar">
                 <Box className="nav-menu">
-                <img className="logo" src={logo} />
-                    <NavLink to="/" className="nav-item">
+                <img className="logo" src={logo} alt="EntreNet" />
+                    <NavLink to="/home" className="nav-item">
                         HOME
                     </NavLink>
                     <NavLink to="/about" className="nav-item">
@@ -68,13 +61,13 @@ const Navbar = (props) => {
                     { login.token ?
                     <IconButton onClick={handleClick}>
                         <AccountCircleIcon className="profile-icon" fontSize='large'/>
-                    </IconButton> : <NavLink to="/login" className="profile-icon">LOGIN</NavLink>
+                    </IconButton> : <NavLink to="/login" className="login-item">LOGIN</NavLink>
                     }
                 </Box>
                 <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
                     <MenuItem divider onClick={handleNav('/profile')}>
                         <Box className="profile-info">
-                            <Box className="user-name">{formatName(login.first, login.last)}</Box>
+                            <Box className="user-name">{login.first + " " + login.last}</Box>
                             <Box className="user-email">{login.email}</Box>
                         </Box>
                     </MenuItem>

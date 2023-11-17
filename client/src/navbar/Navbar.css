@@ -20,8 +20,20 @@
 
 .nav-item {
     color: white;
-    text-decoration: none;
     padding: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.login-item {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    border: solid white;
 }
 
 .profile-nav {
@@ -36,7 +48,6 @@
 
 .profile-icon, .nav-item:focus {
     color: lightblue;
-    text-decoration: none
 }
 
 .profile-info {
@@ -46,6 +57,7 @@
 
 .user-name {
     font-weight: bold;
+    text-transform: capitalize;
 }
 
 .user-email {
@@ -53,6 +65,10 @@
     color: gray;
 }
 
-.profile-icon:hover, .nav-item:hover {
-    color: gray
+.profile-icon:hover, .nav-item:hover, .login-item:hover {
+    color: gray;
+}
+
+.login-item:hover {
+    border: solid gray
 }
