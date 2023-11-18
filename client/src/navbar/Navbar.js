@@ -1,6 +1,6 @@
 import './Navbar.css'
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom"
+import { NavLink, useNavigate, useLocation } from "react-router-dom"
 import { Box, IconButton, Menu, MenuItem, ListItemIcon } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AccountBox from '@mui/icons-material/AccountCircle';
@@ -8,11 +8,14 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import logo from '../logo.png'
 
+const pages = ["/home", "/about", "/resources", "/blogs", "/forums", "/contact"];
+
 const Navbar = (props) => {
-    const { login, setLogin } = props
+    const { login, setLogin } = props;
     
     const [anchorEl, setAnchorEl] = useState(null);
     const navigate = useNavigate()
+    const location = useLocation();
     const open = Boolean(anchorEl);
 
     const handleClick = (event) => {
@@ -24,8 +27,8 @@ const Navbar = (props) => {
     };
     
     const handleNav = page => () => {
-        handleClose()
-        navigate(page)
+        handleClose();
+        navigate(page);
     };
 
     const handleLogout = () => {
@@ -33,34 +36,25 @@ const Navbar = (props) => {
         handleNav('/login')()
     };
 
+    const handleTabStyle = (page) => {
+        return page === location.pathname ? "active tab" : "unactive tab";
+    }
+
     return (
         <>
             <Box className="nav-bar">
                 <Box className="nav-menu">
                 <img className="logo" src={logo} alt="EntreNet" />
-                    <NavLink to="/home" className="nav-item">
-                        HOME
-                    </NavLink>
-                    <NavLink to="/about" className="nav-item">
-                        ABOUT
-                    </NavLink>
-                    <NavLink to="/resources" className="nav-item">
-                        RESOURCES
-                    </NavLink>
-                    <NavLink to="/blogs" className="nav-item">
-                        BLOGS
-                    </NavLink>
-                    <NavLink to="/forums" className="nav-item">
-                        FORUMS
-                    </NavLink>
-                    <NavLink to="/contact" className="nav-item">
-                        CONTACT
-                    </NavLink>
+                    {pages.map(page =>
+                        <NavLink to={page} className={handleTabStyle(page)}>
+                            {page.slice(1)}
+                        </NavLink>
+                    )}  
                 </Box>
                 <Box className="profile">
                     { login.token ?
                     <IconButton onClick={handleClick}>
-                        <AccountCircleIcon className="profile-icon" fontSize='large'/>
+                        <AccountCircleIcon className="active" fontSize='large'/>
                     </IconButton> : <NavLink to="/login" className="login-item">LOGIN</NavLink>
                     }
                 </Box>

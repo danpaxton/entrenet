@@ -6,9 +6,7 @@ body  {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 600px;
-    width: 100%;
+    gap: 10px;
 }
 
 .contact {
@@ -24,7 +22,11 @@ body  {
 .contact-header {
     font-weight: bolder;
     font-size: xx-large;
-    padding: 5px;
+    background: white;
+    border-bottom: solid lightgray;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
 }
 
 .contact-label {

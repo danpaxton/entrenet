@@ -15,15 +15,23 @@
 .nav-menu {
     display: flex;
     justify-content: left;
-    font-size: medium;
+    align-items: center;
 }
 
-.nav-item {
-    color: white;
+.tab {
     padding: 20px;
     font-weight: bold;
     cursor: pointer;
     text-decoration: none;
+    text-transform: uppercase;
+}
+
+.active {
+    color: lightblue;
+}
+
+.unactive {
+    color: white;
 }
 
 .login-item {
@@ -44,10 +52,6 @@
 .profile {
     padding-right: 15px;
     padding-left: 15px;
-}
-
-.profile-icon, .nav-item:focus {
-    color: lightblue;
 }
 
 .profile-info {

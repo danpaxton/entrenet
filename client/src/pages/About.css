@@ -1,0 +1,27 @@
+.about-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.about-text {
+    padding: 10px;
+    font-size: large;
+    line-height: 1.5;
+    width: 500px;
+    text-align: center;
+    border: solid lightgray;
+    border-radius: 5px;
+    background: white;
+}
+
+.about-header {
+    font-size: xx-large;
+    text-align: center;
+    font-weight: bold;
+    padding: 20px;
+    width: 100%;
+    border-bottom: solid lightgray;
+    background: white;
+}
