@@ -2,7 +2,7 @@ import { Box, TextField, Button } from '@mui/material'
 import './Contact.css'
 
 const Contact = (props) => {
-    const { login } = props
+    const { login } = props;
 
     return (
         <Box className="contact-page">

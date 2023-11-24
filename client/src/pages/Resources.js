@@ -1,10 +1,15 @@
 import React from 'react';
- 
+import { Box } from '@mui/material';
+import Editor from "../editor/Editor";
+import "./Resources.css"
+
 const Resources = () => {
     return (
-        <div>
-            <h1>Resources</h1>
-        </div>
+        <Box className="resource-page">
+            <Box className="editor-space">
+                <Editor/>
+            </Box>
+        </Box>
     );
 };
  

@@ -8,7 +8,9 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import logo from '../logo.png'
 
-const pages = ["/home", "/about", "/resources", "/blogs", "/forums", "/contact"];
+const pages = ["/", "/about", "/resources", "/blogs", "/forums", "/contact"];
+
+const pageNames = ["home", "about", "resources", "blogs", "forums", "contact"];
 
 const Navbar = (props) => {
     const { login, setLogin } = props;
@@ -45,11 +47,11 @@ const Navbar = (props) => {
             <Box className="nav-bar">
                 <Box className="nav-menu">
                 <img className="logo" src={logo} alt="EntreNet" />
-                    {pages.map(page =>
+                    {pages.map((page, i) =>
                         <NavLink to={page} className={handleTabStyle(page)}>
-                            {page.slice(1)}
+                            {pageNames[i]}
                         </NavLink>
-                    )}  
+                    )}
                 </Box>
                 <Box className="profile">
                     { login.token ?
