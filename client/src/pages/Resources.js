@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import Editor from "../editor/Editor";
+
 import "./Resources.css"
 
 const Resources = () => {
