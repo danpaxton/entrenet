@@ -2,11 +2,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
 }
 
 .about-text {
-    padding: 10px;
+    padding: 20px;
     font-size: large;
     line-height: 1.5;
     width: 500px;
@@ -14,6 +14,7 @@
     border: solid lightgray;
     border-radius: 5px;
     background: white;
+    box-shadow: 3px 3px 3px lightgray;
 }
 
 .about-header {

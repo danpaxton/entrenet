@@ -1,17 +1,22 @@
-import React from 'react';
-import { Box } from '@mui/material';
-import Editor from "../editor/Editor";
-
+import { Box, List, ListItem } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import "./Resources.css"
 
-const Resources = () => {
+
+const Resources = (props) => {
+    const { resources } = props;
+
     return (
         <Box className="resource-page">
-            <Box className="editor-space">
-                <Editor/>
-            </Box>
+            <List>
+            {resources.map((e, i) =>
+                <ListItem>
+                    {e.title + "\n" + e.desc}
+                </ListItem>
+            )}
+            </List>
         </Box>
     );
 };
- 
+
 export default Resources;

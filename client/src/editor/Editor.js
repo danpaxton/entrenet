@@ -7,10 +7,9 @@ import ImageTool from '@editorjs/image';
 import Checklist from '@editorjs/checklist';
 import Embed from '@editorjs/embed';
 import Quote from '@editorjs/quote';
-import { Box } from "@mui/material";
 
-const Editor = () => {
-    const editor = new EditorJS({
+const Editor = data => {
+    return new EditorJS({
         /**
          * Id of Element that should contain Editor instance
          */
@@ -42,11 +41,8 @@ const Editor = () => {
                 class: Checklist,
                 inlineToolbar: true,
             },
-        }
+        },
+        data
       });
-
-    return (
-        <Box id="editorjs"/>
-    )
 }
 export default Editor

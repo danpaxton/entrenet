@@ -11,7 +11,7 @@ const Login = (props) => {
 
     const handleJoin = () => {
         setLogin({...login, token: "token" });
-        navigate('/home');
+        navigate('/');
         console.log(login.email, password);
     }
 
