@@ -18,15 +18,16 @@ import ResourceView from './pages/ResourceView'
 
 function App() {
   const Resource = (title, desc) => ({ title, desc, data: {} });
+  const Blog = (title, author, img) => ({ title, author, img, data: {} })
 
   const [login, setLogin] = useState({ first: "", last: "", username: "", token: "" })
-
-  const [resources, setResources] = useState([Resource('First resource', 'Initial description')]);
+  const [resources, setResources] = useState([]);
+  const [blogs, stBlogs] = useState([])
 
   useEffect(() => {
       // Get resource pages from backend.
 
-  }, [login, resources])
+  }, [login, resources, blogs])
 
   return (
     <Router>

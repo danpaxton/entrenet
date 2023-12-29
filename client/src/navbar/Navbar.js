@@ -46,7 +46,7 @@ const Navbar = (props) => {
         <>
             <Box className="nav-bar">
                 <Box className="nav-menu">
-                <img className="logo" src={logo} alt="EntreNet" />
+                    <img className="logo" src={logo} alt="EntreNet" />
                     {pages.map((page, i) =>
                         <NavLink to={page} className={handleTabStyle(page)}>
                             {pageNames[i]}
