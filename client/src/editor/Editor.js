@@ -8,7 +8,7 @@ import Checklist from '@editorjs/checklist';
 import Embed from '@editorjs/embed';
 import Quote from '@editorjs/quote';
 
-const Editor = data => {
+const Editor = (data = []) => {
     return new EditorJS({
         /**
          * Id of Element that should contain Editor instance
@@ -42,6 +42,7 @@ const Editor = data => {
                 inlineToolbar: true,
             },
         },
+        readOnly: true,
         data
       });
 }

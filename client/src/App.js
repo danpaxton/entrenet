@@ -9,20 +9,22 @@ import About from './pages/About'
 import Resources from './pages/Resources'
 import Blogs from './pages/Blogs'
 import Forums from './pages/Forums'
-import Contact from './pages/Contact'
-import Profile from './profilePages/Profile'
-import Settings from './profilePages/Settings'
-import Login from './profilePages/Login'
+import Contact from './pages/Contact';
+import Profile from './profilePages/Profile';
+import Settings from './profilePages/Settings';
+import Login from './profilePages/Login';
 import Editor from './editor/Editor';
-import ResourceView from './pages/ResourceView'
 
 function App() {
   const Resource = (title, desc) => ({ title, desc, data: {} });
-  const Blog = (title, author, img) => ({ title, author, img, data: {} })
+  const Blog = (title, author, img) => ({ title, author, img, data: {} });
 
-  const [login, setLogin] = useState({ first: "", last: "", username: "", token: "" })
-  const [resources, setResources] = useState([]);
-  const [blogs, stBlogs] = useState([])
+  const [editor, setEditor] = useState(Editor());
+  const [viewEditor, setViewEditor] = useState(false);
+  const [login, setLogin] = useState({ first: "", last: "", username: "", token: "" });
+  const [resources, setResources] = useState([Resource('first source', 'initial desc')]);
+  const [blogs, setBlogs] = useState([]);
+
 
   useEffect(() => {
       // Get resource pages from backend.
@@ -35,9 +37,8 @@ function App() {
         <Routes>
           <Route exact path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
-          <Route path='/resources' element={<Resources resources={resources} setResources={setResources} />} />
-          <Route path='/resource-view' element={<ResourceView resources={resources} />} />
-          <Route path='/blogs' element={<Blogs />} />
+          <Route path='/resources' element={<Resources editor={editor} setEditor={setEditor} viewEditor={viewEditor} setViewEditor={setViewEditor} resources={resources} setResources={setResources} />} />
+          <Route path='/blogs' element={<Blogs editor={editor} setEditor={setEditor} viewEditor={viewEditor} setViewEditor={setViewEditor} />} />
           <Route path='/forums' element={<Forums />} />
           <Route path='/contact' element={<Contact login={login} setLogin={setLogin} />} />
           <Route path='/profile' element={<Profile />} />

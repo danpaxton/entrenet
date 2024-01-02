@@ -4,25 +4,25 @@ import { Box, TextField, Button } from '@mui/material'
 import './Login.css'
  
 const Login = (props) => {
-    const { login, setLogin } = props
+    const { login, setLogin } = props;
 
-    const [password, setPassword] = useState("")
-    const navigate = useNavigate()
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     const handleJoin = () => {
         setLogin({...login, token: "token" });
         navigate('/');
         console.log(login.email, password);
-    }
+    };
 
     const handleName = attr => name => {
         login[attr] = name.target.value;
         setLogin(login);
-    }
+    };
     
     const handlePassword = pass => {
         setPassword(pass.target.value);
-    }
+    };
 
     return (
         <Box className="login-page">
