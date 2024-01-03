@@ -4,7 +4,7 @@ import './View.css';
 const View = () => {
 
     return (
-        <Box onCLick={setColor} className="editor">
+        <Box  className="editor">
             <Box id="editorjs"/>
         </Box>
     );

@@ -14,9 +14,7 @@ import Profile from './profilePages/Profile';
 import Settings from './profilePages/Settings';
 import Login from './profilePages/Login';
 import Editor from './editor/Editor';
-import { Theme } from '@mui/material';
 
-const theme = Theme()
 
 function App() {
   const Resource = (title, desc) => ({ title, desc, data: {} });
