@@ -1,9 +1,10 @@
-import { Box } from '@mui/material';
+import { Box, StepContext } from '@mui/material';
 import './View.css';
 // Load clicked resource into editor element, and update save position.
 const View = () => {
+
     return (
-        <Box className="editor">
+        <Box onCLick={setColor} className="editor">
             <Box id="editorjs"/>
         </Box>
     );
