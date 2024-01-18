@@ -6,7 +6,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AccountBox from '@mui/icons-material/AccountCircle';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
-import logo from '../logo.png'
+import logo from '../logo.png';
 
 const pages = ["/", "/about", "/resources", "/blogs", "/forums", "/contact"];
 
@@ -44,7 +44,7 @@ const Navbar = (props) => {
 
     return (
         <>
-            <Box className="nav-bar">
+            <Box color="secondary" className="nav-bar">
                 <Box className="nav-menu">
                     <img className="logo" src={logo} alt="EntreNet" />
                     {pages.map((page, i) =>

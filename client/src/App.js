@@ -44,7 +44,7 @@ function App() {
           <Route path='/contact' element={<Contact login={login} setLogin={setLogin} />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/settings' element={<Settings />} />
-          <Route path='/login' element={ <Login login={login} setLogin={setLogin} />}/>
+          <Route path='/login' element={ <Login login={login} setLogin={setLogin} />} />
       </Routes>
   </Router>
   )

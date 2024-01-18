@@ -1,12 +1,10 @@
 import { Backdrop, Box, List, ListItem } from '@mui/material';
 import Editor from '../editor/Editor';
-import "./Resources.css"
 import View from './View';
-
+import "./Resources.css";
 
 const Resources = (props) => {
-    const { resources, setResources, setEditor, viewEditor, setViewEditor } = props;
-
+    const { resources, setResources, editor, setEditor, viewEditor, setViewEditor } = props;
 
     const loadEditor = data => {
         setEditor(Editor(data));
@@ -35,7 +33,7 @@ const Resources = (props) => {
             <Backdrop
                 sx={{ color: '#fff' }}
                 open={viewEditor}>
-                <View/>
+                <View editor={editor} />
             </Backdrop>
         </Box> 
     );

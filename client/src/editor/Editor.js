@@ -42,7 +42,7 @@ const Editor = (data = []) => {
                 inlineToolbar: true,
             },
         },
-        readOnly: true,
+        readOnly: false,
         data
       });
 }

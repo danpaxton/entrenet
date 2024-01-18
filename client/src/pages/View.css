@@ -1,11 +1,22 @@
 .editor {
+    display: flex;
+    flex-direction: column;
     box-sizing: border-box;
     border: solid black;
     border-radius: 5px;
     margin: 50px auto;
-    overflow: scroll;
-    scroll-behavior: smooth;
     height: 600px;
     width: 60%;
     background: white;
+}
+
+.editor-box {
+    overflow: scroll;
+    scroll-behavior: smooth;
+    height: 100%;
+    color: black;
+}
+
+.editor-save {
+    border-bottom: solid black;
 }

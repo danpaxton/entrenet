@@ -1,6 +1,5 @@
-import { textAlign } from '@mui/system';
 import React, { useState } from 'react';
- 
+import { Box } from '@mui/system'; 
 
 const Forum = () => ({ text: "", views: 0, likes: 0, date: "" });
 
@@ -9,7 +8,7 @@ const Forums = () => {
 
     const addForum = () => {
         // TODO add new fourm to forums list.
-    }
+    };
 
     return (
         <div>
