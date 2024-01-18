@@ -8,9 +8,9 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import logo from '../logo.png';
 
-const pages = ["/", "/about", "/resources", "/blogs", "/forums", "/contact"];
+const pages = ["/", "/about", "/resources", "/forums", "/contact"];
 
-const pageNames = ["home", "about", "resources", "blogs", "forums", "contact"];
+const pageNames = ["home", "about", "resources", "forums", "contact"];
 
 const Navbar = (props) => {
     const { login, setLogin } = props;

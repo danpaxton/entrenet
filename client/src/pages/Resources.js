@@ -5,6 +5,7 @@ import "./Resources.css";
 
 const Resources = (props) => {
     const { resources, setResources, editor, setEditor, viewEditor, setViewEditor } = props;
+    
 
     const loadEditor = data => {
         setEditor(Editor(data));

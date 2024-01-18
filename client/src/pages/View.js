@@ -11,7 +11,7 @@ const saveEditor = editor => {
 }
 
 const View = props => {
-    const { editor } = props;
+    const { editor, title } = props;
     
     return (
         <Box className="editor">

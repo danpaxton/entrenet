@@ -7,7 +7,6 @@ import { BrowserRouter as Router, Routes, Route }
 import Home from './pages/Home'
 import About from './pages/About'
 import Resources from './pages/Resources'
-import Blogs from './pages/Blogs'
 import Forums from './pages/Forums'
 import Contact from './pages/Contact';
 import Profile from './profilePages/Profile';
@@ -39,7 +38,6 @@ function App() {
           <Route exact path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
           <Route path='/resources' element={<Resources editor={editor} setEditor={setEditor} viewEditor={viewEditor} setViewEditor={setViewEditor} resources={resources} setResources={setResources} />} />
-          <Route path='/blogs' element={<Blogs editor={editor} setEditor={setEditor} viewEditor={viewEditor} setViewEditor={setViewEditor} />} />
           <Route path='/forums' element={<Forums />} />
           <Route path='/contact' element={<Contact login={login} setLogin={setLogin} />} />
           <Route path='/profile' element={<Profile />} />
