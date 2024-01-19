@@ -3,9 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { Box, TextField, Button } from '@mui/material'
 import './Login.css'
  
-const Login = (props) => {
-    const { login, setLogin } = props;
-
+const Login = ({ login, setLogin }) => {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 

@@ -12,24 +12,14 @@ import Contact from './pages/Contact';
 import Profile from './profilePages/Profile';
 import Settings from './profilePages/Settings';
 import Login from './profilePages/Login';
-import Editor from './editor/Editor';
-
 
 function App() {
-  const Resource = (title, desc) => ({ title, desc, data: {} });
-  const Blog = (title, author, img) => ({ title, author, img, data: {} });
-
-  const [editor, setEditor] = useState(Editor());
-  const [viewEditor, setViewEditor] = useState(false);
   const [login, setLogin] = useState({ first: "", last: "", username: "", token: "" });
-  const [resources, setResources] = useState([Resource('first source', 'initial desc')]);
-  const [blogs, setBlogs] = useState([]);
-
 
   useEffect(() => {
       // Get resource pages from backend.
 
-  }, [login, resources, blogs])
+  }, [login])
 
   return (
     <Router>
@@ -37,9 +27,9 @@ function App() {
         <Routes>
           <Route exact path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
-          <Route path='/resources' element={<Resources editor={editor} setEditor={setEditor} viewEditor={viewEditor} setViewEditor={setViewEditor} resources={resources} setResources={setResources} />} />
+          <Route path='/resources' element={<Resources login={login} />} />
           <Route path='/forums' element={<Forums />} />
-          <Route path='/contact' element={<Contact login={login} setLogin={setLogin} />} />
+          <Route path='/contact' element={<Contact login={login} />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/settings' element={<Settings />} />
           <Route path='/login' element={ <Login login={login} setLogin={setLogin} />} />

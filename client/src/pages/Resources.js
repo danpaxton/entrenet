@@ -1,14 +1,18 @@
 import { Backdrop, Box, List, ListItem } from '@mui/material';
-import Editor from '../editor/Editor';
-import View from './View';
+import ResourceEditor from '../editors/ResourceEditor';
+import ResourceView from '../editors/ResourceView';
+import { useState } from 'react';
 import "./Resources.css";
 
-const Resources = (props) => {
-    const { resources, setResources, editor, setEditor, viewEditor, setViewEditor } = props;
-    
+const Resource = (title, desc) => ({ title, desc, data: {} });
+
+const Resources = ({ login }) => {
+    const [editor, setEditor] = useState(ResourceEditor());
+    const [resources, setResources] = useState([Resource('first source', 'initial desc')]);
+    const [viewEditor, setViewEditor] = useState(false);
 
     const loadEditor = data => {
-        setEditor(Editor(data));
+        setEditor(ResourceEditor(data));
         setViewEditor(true);
     };
 
@@ -16,10 +20,17 @@ const Resources = (props) => {
         setViewEditor(false);
     };
 
+    const saveResource = () => {
+        editor.save().then(output => {
+            console.log(output)
+        }).catch((error) => {
+            console.log('Error saving to editor.', error)
+        })
+    }
+
     const newResource = (title, desc) => {
-        resources.push({ title, desc, data: [] });
+        resources.push(Resource(title, desc));
         setResources(resources);
-        loadEditor();
     };
 
     return (
@@ -34,7 +45,7 @@ const Resources = (props) => {
             <Backdrop
                 sx={{ color: '#fff' }}
                 open={viewEditor}>
-                <View editor={editor} />
+                <ResourceView closeEditor={closeEditor} saveResource={saveResource} />
             </Backdrop>
         </Box> 
     );

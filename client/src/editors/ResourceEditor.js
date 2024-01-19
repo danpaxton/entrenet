@@ -8,7 +8,7 @@ import Checklist from '@editorjs/checklist';
 import Embed from '@editorjs/embed';
 import Quote from '@editorjs/quote';
 
-const Editor = (data = []) => {
+const ResourceEditor = (data = []) => {
     return new EditorJS({
         /**
          * Id of Element that should contain Editor instance
@@ -46,4 +46,4 @@ const Editor = (data = []) => {
         data
       });
 }
-export default Editor
+export default ResourceEditor

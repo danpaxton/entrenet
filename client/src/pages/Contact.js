@@ -1,9 +1,7 @@
 import { Box, TextField, Button } from '@mui/material'
 import './Contact.css'
 
-const Contact = (props) => {
-    const { login } = props;
-
+const Contact = ({ login }) => {
     return (
         <Box className="contact-page">
             <Box className="contact-header">Contact Us</Box>

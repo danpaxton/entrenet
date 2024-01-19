@@ -4,19 +4,22 @@
     box-sizing: border-box;
     border: solid black;
     border-radius: 5px;
-    margin: 50px auto;
-    height: 600px;
-    width: 60%;
+    height: 90%;
+    width: 90%;
     background: white;
+}
+
+.ce-block__content,
+.ce-toolbar__content {
+    max-width: 85%;
 }
 
 .editor-box {
     overflow: scroll;
     scroll-behavior: smooth;
-    height: 100%;
     color: black;
 }
 
-.editor-save {
+.editor-return {
     border-bottom: solid black;
 }

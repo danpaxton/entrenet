@@ -12,9 +12,7 @@ const pages = ["/", "/about", "/resources", "/forums", "/contact"];
 
 const pageNames = ["home", "about", "resources", "forums", "contact"];
 
-const Navbar = (props) => {
-    const { login, setLogin } = props;
-    
+const Navbar = ({ login, setLogin }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const navigate = useNavigate()
     const location = useLocation();
@@ -43,42 +41,40 @@ const Navbar = (props) => {
     }
 
     return (
-        <>
-            <Box color="secondary" className="nav-bar">
-                <Box className="nav-menu">
-                    <img className="logo" src={logo} alt="EntreNet" />
-                    {pages.map((page, i) =>
-                        <NavLink to={page} className={handleTabStyle(page)}>
-                            {pageNames[i]}
-                        </NavLink>
-                    )}
-                </Box>
-                <Box className="profile">
-                    { login.token ?
-                    <IconButton onClick={handleClick}>
-                        <AccountCircleIcon className="active" fontSize='large'/>
-                    </IconButton> : <NavLink to="/login" className="login-item">LOGIN</NavLink>
-                    }
-                </Box>
-                <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-                    <MenuItem divider onClick={handleNav('/profile')}>
-                        <Box className="profile-info">
-                            <Box className="user-name">{login.first + " " + login.last}</Box>
-                            <Box className="user-email">{login.email}</Box>
-                        </Box>
-                    </MenuItem>
-                    <MenuItem onClick={handleNav('/profile')}>
-                        <ListItemIcon><AccountBox fontSize="small"/></ListItemIcon>Profile
-                    </MenuItem>
-                    <MenuItem onClick={handleNav('/settings')}>
-                        <ListItemIcon><Settings fontSize="small"/></ListItemIcon>Settings
-                    </MenuItem>
-                    <MenuItem onClick={handleLogout}>
-                        <ListItemIcon><Logout fontSize="small"/></ListItemIcon>Logout
-                    </MenuItem>
-                </Menu>
+        <Box color="secondary" className="nav-bar">
+            <Box className="nav-menu">
+                <img className="logo" src={logo} alt="EntreNet" />
+                {pages.map((page, i) =>
+                    <NavLink to={page} className={handleTabStyle(page)}>
+                        {pageNames[i]}
+                    </NavLink>
+                )}
             </Box>
-        </>
+            <Box className="profile">
+                { login.token ?
+                <IconButton onClick={handleClick}>
+                    <AccountCircleIcon className="active" fontSize='large'/>
+                </IconButton> : <NavLink to="/login" className="login-item">LOGIN</NavLink>
+                }
+            </Box>
+            <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+                <MenuItem divider onClick={handleNav('/profile')}>
+                    <Box className="profile-info">
+                        <Box className="user-name">{login.first + " " + login.last}</Box>
+                        <Box className="user-email">{login.email}</Box>
+                    </Box>
+                </MenuItem>
+                <MenuItem onClick={handleNav('/profile')}>
+                    <ListItemIcon><AccountBox fontSize="small"/></ListItemIcon>Profile
+                </MenuItem>
+                <MenuItem onClick={handleNav('/settings')}>
+                    <ListItemIcon><Settings fontSize="small"/></ListItemIcon>Settings
+                </MenuItem>
+                <MenuItem onClick={handleLogout}>
+                    <ListItemIcon><Logout fontSize="small"/></ListItemIcon>Logout
+                </MenuItem>
+            </Menu>
+        </Box>
     );
 };
  
