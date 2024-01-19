@@ -1,7 +1,7 @@
 ## Current tasks
 ### Front-end
 
-Dan - Resources, Finshing a text editor designed for admin users to make changes to a resource. After completing the text-edior I will complete the styling of the resource page.
+Dan - Resources, Finshing a text editor designed for admin users to make changes to a resource. After completing the text-editor I will complete the styling of the resource page.
 
 ### Back-end
 Initial set up.
