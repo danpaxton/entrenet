@@ -1,4 +1,4 @@
-import { Backdrop, Box, List, ListItem } from '@mui/material';
+import { Backdrop, Box, List } from '@mui/material';
 import ResourceEditor from '../editors/ResourceEditor';
 import ResourceView from '../editors/ResourceView';
 import { useState } from 'react';
@@ -8,7 +8,13 @@ const Resource = (title, desc) => ({ title, desc, data: {} });
 
 const Resources = ({ login }) => {
     const [editor, setEditor] = useState(ResourceEditor());
-    const [resources, setResources] = useState([Resource('first source', 'initial desc')]);
+    const [resources, setResources] = useState(
+        [
+            Resource('First source', 'This is a description for the first source, resources are the main source of information for the users of entrenet.'),
+            Resource('Second source', 'This is a description for the first source, resources are the main source of information for the users of entrenet. This resource has more text in the description.'),
+            Resource('Third source', 'This resource has a brief description.')
+        ]
+        );
     const [viewEditor, setViewEditor] = useState(false);
 
     const loadEditor = data => {
@@ -35,16 +41,15 @@ const Resources = ({ login }) => {
 
     return (
         <Box className="resource-page">
-            <List>
+            <List className="resource-list">
                 {resources.map((e, i) =>
-                    <ListItem key={i} onClick={() => loadEditor(e.data)}>
-                        {e.title + " " + e.desc}
-                    </ListItem>
+                    <Box className="resource-item">
+                        <Box className="resource-title" onClick={() => loadEditor(e.data)} >{e.title}</Box>
+                        <Box className="resource-desc">{e.desc}</Box>
+                    </Box>
                 )}
             </List>
-            <Backdrop
-                sx={{ color: '#fff' }}
-                open={viewEditor}>
+            <Backdrop onDoubleClick={closeEditor} sx={{ color: '#fff' }} open={viewEditor}>
                 <ResourceView closeEditor={closeEditor} saveResource={saveResource} />
             </Backdrop>
         </Box> 

@@ -1,19 +1,39 @@
 .resource-page {
+    background: whitesmoke;
+    display: flex;
+    justify-content: left;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-top: 1%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.resource-list {
     display: flex;
     flex-direction: column;
-    background: whitesmoke;
+    width: 100%;
+    justify-content: left;
+    gap: 20px;
+}
+
+.resource-item {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    border: solid lightgray;
+    background: white;
+    padding: 20px;
 }
 
 .resource-title {
-    color: black;
+    color: darkblue;
+    font-size: x-large;
     font-weight: bolder;
+    padding-bottom: 5px;
+    cursor: pointer;
 }
 
 .resource-desc {
-    color: grey;
-}
-
-.resource {
-    display: flex;
-    flex-direction: column;
+    color: black;
 }

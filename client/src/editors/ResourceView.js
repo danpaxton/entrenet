@@ -10,7 +10,7 @@ const ResourceView =  ({ closeEditor, saveResource }) => {
                 <IconButton onClick={closeEditor}><ArrowBackIcon/></IconButton>
             </Box>
             <Box className="editor-box">
-                <Box onKeyDown={saveResource} id="editorjs"/>
+                <div onKeyDown={saveResource} id="editorjs"/>
             </Box>
         </Box>
     );
