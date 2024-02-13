@@ -14,7 +14,7 @@ const Resources = ({ login }) => {
             Resource('Second source', 'This is a description for the first source, resources are the main source of information for the users of entrenet. This resource has more text in the description.'),
             Resource('Third source', 'This resource has a brief description.')
         ]
-        );
+    );
     const [viewEditor, setViewEditor] = useState(false);
 
     const loadEditor = data => {
@@ -52,7 +52,7 @@ const Resources = ({ login }) => {
             <Backdrop onDoubleClick={closeEditor} sx={{ color: '#fff' }} open={viewEditor}>
                 <ResourceView closeEditor={closeEditor} saveResource={saveResource} />
             </Backdrop>
-        </Box> 
+        </Box>
     );
 };
 export default Resources;
