@@ -7,7 +7,7 @@ import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 
 const Forum = () => ({ text: "", views: 0, likes: 0, date: "" });
 
-const Forums = ({ author, content }) => {
+const Forums = () => {
     const [forums, setForums] = useState([]);
     const [likes, setLikes] = useState(0);
 
