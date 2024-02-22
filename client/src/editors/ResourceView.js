@@ -1,16 +1,20 @@
 import { Box, IconButton } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ResourceEditor from './ResourceEditor';
 import './ResourceView.css';
 
-const ResourceView =  ({ closeEditor, saveResource }) => {
+const ResourceView =  ({ closeResource, resourceData }) => {
     
     return (
         <Box className="editor">
-            <Box className="editor-return">
-                <IconButton onClick={closeEditor}><ArrowBackIcon/></IconButton>
+            <Box>
+                <IconButton onClick={closeResource}>
+                    <ArrowBackIcon/>
+                </IconButton>
             </Box>
             <Box className="editor-box">
-                <div onKeyDown={saveResource} id="editorjs"/>
+                { false ? resourceData :
+                    <ResourceEditor resourceData={resourceData} /> }
             </Box>
         </Box>
     );

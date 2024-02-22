@@ -37,3 +37,7 @@
 .resource-desc {
     color: black;
 }
+
+.resource-backdrop {
+    background-color: #fff;
+}
