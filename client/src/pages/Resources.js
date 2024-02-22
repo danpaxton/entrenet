@@ -14,8 +14,13 @@ const Resources = ({ login }) => {
             Resource('Second source', 'This is a description for the first source, resources are the main source of information for the users of entrenet. This resource has more text in the description.'),
             Resource('Third source', 'This resource has a brief description.')
         ]
+<<<<<<< HEAD
         );
     const [viewResource, setViewResource] = useState(false);
+=======
+    );
+    const [viewEditor, setViewEditor] = useState(false);
+>>>>>>> df62bc8c5ae4b997e05028625bf7efce41cea125
 
     const loadResource = data => {
         setResourceData(data);
@@ -44,7 +49,7 @@ const Resources = ({ login }) => {
             <Backdrop onDoubleClick={closeResource} className="resource-backdrop" open={viewResource}>
                 <ResourceView closeResource={closeResource} resourceData={resourceData}/>
             </Backdrop>
-        </Box> 
+        </Box>
     );
 };
 export default Resources;

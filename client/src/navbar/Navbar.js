@@ -25,7 +25,7 @@ const Navbar = ({ login, setLogin }) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
-    
+
     const handleNav = page => () => {
         handleClose();
         navigate(page);
@@ -51,10 +51,10 @@ const Navbar = ({ login, setLogin }) => {
                 )}
             </Box>
             <Box className="profile">
-                { login.token ?
-                <IconButton onClick={handleClick}>
-                    <AccountCircleIcon className="active" fontSize='large'/>
-                </IconButton> : <NavLink to="/login" className="login-item">LOGIN</NavLink>
+                {login.token ?
+                    <IconButton onClick={handleClick}>
+                        <AccountCircleIcon className="active" fontSize='large' />
+                    </IconButton> : <NavLink to="/login" className="login-item">LOGIN</NavLink>
                 }
             </Box>
             <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
@@ -65,17 +65,17 @@ const Navbar = ({ login, setLogin }) => {
                     </Box>
                 </MenuItem>
                 <MenuItem onClick={handleNav('/profile')}>
-                    <ListItemIcon><AccountBox fontSize="small"/></ListItemIcon>Profile
+                    <ListItemIcon><AccountBox fontSize="small" /></ListItemIcon>Profile
                 </MenuItem>
                 <MenuItem onClick={handleNav('/settings')}>
-                    <ListItemIcon><Settings fontSize="small"/></ListItemIcon>Settings
+                    <ListItemIcon><Settings fontSize="small" /></ListItemIcon>Settings
                 </MenuItem>
                 <MenuItem onClick={handleLogout}>
-                    <ListItemIcon><Logout fontSize="small"/></ListItemIcon>Logout
+                    <ListItemIcon><Logout fontSize="small" /></ListItemIcon>Logout
                 </MenuItem>
             </Menu>
         </Box>
     );
 };
- 
+
 export default Navbar;
