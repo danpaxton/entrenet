@@ -10,6 +10,16 @@
     flex-direction: column;
 }
 
+.editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+    padding-right: 15px;
+    border-bottom: solid lightgray;
+}
+
 .editor-box {
     color: black;
     height: 100%;
@@ -17,4 +27,5 @@
 
 .tox-tinymce {
     height: 100% !important;
+    border: none !important;
 }
