@@ -1,12 +1,17 @@
 .resource-page {
     background: whitesmoke;
     display: flex;
+    flex-direction: column;
     justify-content: left;
-    padding-left: 50px;
-    padding-right: 50px;
-    margin-top: 1%;
-    margin-left: 15%;
-    margin-right: 15%;
+}
+
+.resource-header {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: large;
+    padding-top: 10px;
+    width: 100%;
 }
 
 .resource-list {
@@ -14,30 +19,45 @@
     flex-direction: column;
     width: 100%;
     justify-content: left;
-    gap: 20px;
+    gap: 10px;
 }
 
 .resource-item {
     display: flex;
     flex-direction: column;
+    align-items: left;
+    margin-left: 10%;
+    margin-right: 10%;
     border-radius: 5px;
     border: solid lightgray;
     background: white;
-    padding: 20px;
+    padding: 10px;
 }
 
 .resource-title {
     color: darkblue;
     font-size: x-large;
     font-weight: bolder;
-    padding-bottom: 5px;
     cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
-.resource-desc {
-    color: black;
+.resource-stats {
+    display: flex;
+    justify-content: space-between;
+    color: gray;
+}
+
+.resource-like, .resource-view {
+    display: flex;
+    align-items: center;
+}
+
+.resource-view {
+    gap: 10px;
 }
 
 .resource-backdrop {
-    background-color: #fff;
+    color: #fff
 }

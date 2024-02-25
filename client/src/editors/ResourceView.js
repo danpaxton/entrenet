@@ -7,18 +7,22 @@ import './ResourceView.css';
 
 const ResourceView =  ({ closeResource, resource, setResource }) => {
     const [admin, setAdmin] = useState(true);
+    const [saved, setSaved] = useState(true);
     return (
         <Box className="editor">
             <Box className="editor-header">
-                <IconButton onClick={closeResource}>
-                    <ArrowBackIcon/>
-                </IconButton>
+                <Box className="editor-save">
+                    <IconButton onClick={closeResource}>
+                        <ArrowBackIcon/>
+                    </IconButton>
+                    {saved ? "All changes saved." : "Unsaved changes."}
+                </Box>
                 <Box>
                     {resource.title}
                 </Box>
             </Box>
             <Box className="editor-box">
-                <ResourceEditor resource={resource} setResource={setResource} admin={admin}/>
+                <ResourceEditor resource={resource} setResource={setResource} setSaved={setSaved} admin={admin}/>
             </Box>
         </Box>
     );

@@ -1,12 +1,16 @@
 import { useRef } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 
-const ResourceEditor = ({ resource, setResource, admin }) => {
+const ResourceEditor = ({ resource, setResource, setSaved, admin }) => {
   const editorRef = useRef(null);
   const saveResource = () => {
     if (editorRef.current) {
-      resource.data = editorRef.current.getContent()
+      // resource.data = editorRef.current.getContent()
       setResource(resource);
+      setSaved(false);
+      setTimeout(() => {
+        setSaved(true);
+      }, "1000")
     }
   };
   return (
