@@ -1,7 +1,7 @@
 ## Current tasks
 ### Front-end
 
-Dan - Backend, I am finishing the initial contruction of the Backend.
+Dan - Front/Back end, I am completing the the connection between the client and server for the resources page specifically.
 
 ### Back-end
 Initial set up.

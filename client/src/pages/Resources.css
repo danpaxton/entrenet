@@ -35,6 +35,8 @@
 }
 
 .resource-title {
+    display: flex;
+    justify-content: space-between;
     color: darkblue;
     font-size: x-large;
     font-weight: bolder;
@@ -58,6 +60,23 @@
     gap: 10px;
 }
 
+.resource-new {
+    display: flex;
+}
+
+.resource-new-buttons {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+}
+
 .resource-backdrop {
-    color: #fff
+    color: #fff;
+}
+
+.resource-date {
+    color: gray;
+    font-weight: normal;
+    font-size: small;
+    font-style: italic;
 }

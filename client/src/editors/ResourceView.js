@@ -15,7 +15,8 @@ const ResourceView =  ({ closeResource, resource, setResource }) => {
                     <IconButton onClick={closeResource}>
                         <ArrowBackIcon/>
                     </IconButton>
-                    {saved ? "All changes saved." : "Unsaved changes."}
+
+                    { admin ? (saved ? "All changes saved." : "Unsaved changes.") : null }
                 </Box>
                 <Box>
                     {resource.title}

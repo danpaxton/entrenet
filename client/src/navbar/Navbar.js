@@ -45,7 +45,7 @@ const Navbar = ({ login, setLogin }) => {
             <Box className="nav-menu">
                 <img className="logo" src={logo} alt="EntreNet" />
                 {pages.map((page, i) =>
-                    <NavLink to={page} className={handleTabStyle(page)}>
+                    <NavLink key={i} to={page} className={handleTabStyle(page)}>
                         {pageNames[i]}
                     </NavLink>
                 )}
