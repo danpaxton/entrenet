@@ -1,16 +1,14 @@
 import { useRef } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 
-const ResourceEditor = ({ resource, setResource, setSaved, admin }) => {
+const ResourceEditor = ({ setSaved, resource }) => {
   const editorRef = useRef(null);
   const saveResource = () => {
     if (editorRef.current) {
-      // resource.data = editorRef.current.getContent()
-      setResource(resource);
       setSaved(false);
-      setTimeout(() => {
-        setSaved(true);
-      }, "1000")
+      resource.data = editorRef.current.getContent();
+      console.log(resource);
+      setSaved(true);
     }
   };
   return (
@@ -20,13 +18,13 @@ const ResourceEditor = ({ resource, setResource, setSaved, admin }) => {
         onInit={(evt, editor) => editorRef.current = editor}
         initialValue={resource.data}
         onKeyDown={saveResource}
-        disabled={!admin}
+        selector=".tinydiv"
         init={{
             selector: 'textarea#open-source-plugins',
             plugins: 'preview paste importcss searchreplace autolink directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists imagetools textpattern noneditable charmap quickbars emoticons',
             imagetools_cors_hosts: ['picsum.photos'],
-            menubar: admin && 'edit view insert format tools table help',
-            toolbar: admin && 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview | insertfile image media template link anchor codesample | ltr rtl',
+            menubar: 'edit view insert format tools table help',
+            toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview | insertfile image media template link anchor codesample | ltr rtl',
             toolbar_sticky: true,
             statusbar: false,
             image_advtab: true,

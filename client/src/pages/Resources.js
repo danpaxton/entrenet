@@ -6,6 +6,8 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
+import EditIcon from '@mui/icons-material/Edit';
+
 
 import { useEffect, useState } from 'react';
 import { api } from '../App';
@@ -19,16 +21,17 @@ const Resource = (title = "") => ({
     date: new Date() 
 });
 
-const Resources = ({ login }) => {
-    const [resource, setResource] = useState(Resource());
+const Resources = ({ login, admin }) => {
+    const [resourceId, setResourceId] = useState(null);
     const [resources, setResources] = useState([]);
     const [viewResource, setViewResource] = useState(false);
     const [openNewResource, setOpenNewResource] = useState(false);
-
+    const [editable, setEditable] = useState(false);
     const [resourceTitle, setResourceTitle] = useState("");
     const [titleError, setTitleError] = useState(false);
     const [titleLabel, setTitleLabel] = useState("Enter file name.")
 
+    // Fetch all resources.
     const fetchResources = async () => {
         try {
             const { data } = await api.get('/resources');
@@ -38,6 +41,7 @@ const Resources = ({ login }) => {
         }
     };
 
+    // Create a new resource
     const newResource = async title => {
         try {
             const { data } = await api.post('/resource/add', Resource(title))
@@ -47,28 +51,22 @@ const Resources = ({ login }) => {
         }
     };
 
-    const handleOpenNewResource = () => {
-        setOpenNewResource(true);
+    const closeResource = () => {
+        setResourceId(null);
+        setViewResource(false);
+        setEditable(false);
     };
 
-    const handleResourceTitleChange = f => {
-        setResourceTitle(f.target.value);
-    };
-    
     const loadResource = data => {
         data.views += 1;
-        setResource(data);
+        setResourceId(data._id);
         setViewResource(true);
     };
 
-    const handleLike = data => {
-        data.likes += 1;
-        setResource(data);
-    };
-
-    const closeResource = () => {
-        setResource(Resource());
-        setViewResource(false);
+    const handleEdit = data => {
+        setEditable(true);
+        setResourceId(data._id);
+        setViewResource(true);
     };
 
     const handleCloseNewResource = () => {
@@ -90,11 +88,24 @@ const Resources = ({ login }) => {
         }
     };
 
+    const handleOpenNewResource = () => {
+        setOpenNewResource(true);
+    };
+
+    const handleResourceTitleChange = f => {
+        setResourceTitle(f.target.value);
+    };
+    
+    const handleLike = data => {
+        data.likes += 1;
+    };
+
     const formatDate = date => {
         const d = new Date(date);
         return d.getUTCMonth() + "/" + d.getUTCDate() + "/" + d.getUTCFullYear().toString().slice(2, 4)
     };
     
+    // Fetch resources on page load.
     useEffect(() => {
         fetchResources();
     });
@@ -105,8 +116,8 @@ const Resources = ({ login }) => {
                 <DialogActions className="resource-new">
                     <TextField label={titleLabel} error={titleError} variant="standard" onChange={handleResourceTitleChange}/>
                     <Box className="resource-new-buttons">
-                        <IconButton size="small" onClick={handleCreateNewResource}><CheckIcon/></IconButton>
-                        <IconButton size="small" onClick={handleCloseNewResource}><CloseIcon/></IconButton>
+                        <IconButton onClick={handleCreateNewResource}><CheckIcon size="small"/></IconButton>
+                        <IconButton onClick={handleCloseNewResource}><CloseIcon size="small"/></IconButton>
                     </Box>
                 </DialogActions> 
             </Dialog>
@@ -120,17 +131,22 @@ const Resources = ({ login }) => {
                             <Box className="resource-title" onClick={() => loadResource(e)} >{e.title}
                                 <Box className="resource-date">{formatDate(e.date)}</Box>
                             </Box>
+                            { viewResource ? null :
                             <Box className="resource-stats">
-                                <Box className="resource-like"><IconButton onClick={() => handleLike(e)}><ThumbUpAltIcon/></IconButton>{e.likes}</Box>
+                                <Box className="resource-like-edit">
+                                    <IconButton onClick={() => handleLike(e)}><ThumbUpAltIcon/></IconButton>{e.likes}
+                                    { admin ? <IconButton onClick={() => handleEdit(e)}><EditIcon size="small"/></IconButton> : null }
+                                </Box>
                                 <Box className="resource-view">{e.views}<VisibilityIcon/></Box>
                             </Box>
+                            }
+                            <Backdrop onDoubleClick={closeResource} open={viewResource && resourceId === e._id} className="resource-backdrop">
+                                <ResourceView id={i} closeResource={closeResource} editable={editable} resource={e} />
+                            </Backdrop>
                         </Box>
                     )}
                 </List>
             </Box>
-            <Backdrop onDoubleClick={closeResource} open={viewResource} className="resource-backdrop">
-                <ResourceView closeResource={closeResource} resource={resource} setResource={setResource}/>
-            </Backdrop>
         </Box> 
     );
 };

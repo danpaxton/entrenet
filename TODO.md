@@ -1,7 +1,7 @@
 ## Current tasks
 ### Front-end
 
-Dan - Front/Back end, completion of resource update and delete functionality.
+Dan - Front/Back end, setup Id functionality for front end and backend.
 
 ### Back-end
 Initial set up.

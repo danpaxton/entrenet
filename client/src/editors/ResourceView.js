@@ -5,8 +5,7 @@ import {useState} from 'react'
 
 import './ResourceView.css';
 
-const ResourceView =  ({ closeResource, resource, setResource }) => {
-    const [admin, setAdmin] = useState(true);
+const ResourceView =  ({ resource, closeResource, editable }) => {
     const [saved, setSaved] = useState(true);
     return (
         <Box className="editor">
@@ -16,14 +15,15 @@ const ResourceView =  ({ closeResource, resource, setResource }) => {
                         <ArrowBackIcon/>
                     </IconButton>
 
-                    { admin ? (saved ? "All changes saved." : "Unsaved changes.") : null }
+                    { editable ? (saved ? "All changes saved." : "Unsaved changes.") : null }
                 </Box>
                 <Box>
                     {resource.title}
                 </Box>
             </Box>
             <Box className="editor-box">
-                <ResourceEditor resource={resource} setResource={setResource} setSaved={setSaved} admin={admin}/>
+                {editable ? <ResourceEditor setSaved={setSaved} resource={resource} />
+                 : null }
             </Box>
         </Box>
     );

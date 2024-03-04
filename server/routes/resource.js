@@ -34,8 +34,7 @@ resourceRoutes.route("/resource/add").post((req, res) => {
   })
 });
 
-/* Update a resource.
-resourceRoutes.route("/update/:id").post((req, response) => {
+resourceRoutes.route("/update/:id").post((req, res) => {
  let db_connect = dbo.getDb("users");
  let myquery = { _id: ObjectId(req.params.id) };
  let newvalues = {
@@ -49,13 +48,11 @@ resourceRoutes.route("/update/:id").post((req, response) => {
  };
  db_connect
    .collection("resources")
-   .updateOne(myquery, newvalues, (err, res) => {
-     if (err) throw err;
-     console.log("1 document updated");
-     response.json(res);
+   .updateOne(myquery, newvalues)
+   .then(data => {
+     res.json(data);
    });
 });
-*/
 
 /* Delete a resource.
 resourceRoutes.route("/:id").delete((req, response) => {

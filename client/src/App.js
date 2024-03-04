@@ -18,6 +18,7 @@ export const api = axios.create({ baseURL: "http://localhost:5000/"});
 
 function App() {
   const [login, setLogin] = useState({ first: "", last: "", username: "", token: "" });
+  const [admin, setAdmin] = useState(true);
 
   return (
     <Router>
@@ -25,7 +26,7 @@ function App() {
       <Routes>
         <Route exact path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
-        <Route path='/resources' api={api} element={<Resources login={login} />} />
+        <Route path='/resources' api={api} element={<Resources login={login} admin={admin} />} />
         <Route path='/forums' element={<Forums />} />
         <Route path='/contact' element={<Contact login={login} />} />
         <Route path='/profile' element={<Profile />} />
