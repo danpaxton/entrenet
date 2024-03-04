@@ -3,31 +3,20 @@ const dbo = require("../db/conn");
 const ObjectId = require("mongodb").ObjectId;
 const resourceRoutes = express.Router();
  
- 
+// Fetch all resources.
 resourceRoutes.route("/resources").get((req, res) => {
- let db_connect = dbo.getDb("users");
+ let db_connect = dbo.getDb();
  db_connect
    .collection("resources")
    .find({})
-   .toArray((err, result) => {
-     if (err) throw err;
-     res.json(result);
+   .toArray()
+   .then(data => {
+     res.json(data);
    });
 });
- 
-resourceRoutes.route("/resource/:id").get((req, res) => {
- let db_connect = dbo.getDb();
- let myquery = { _id: ObjectId(req.params.id) };
- db_connect
-   .collection("resources")
-   .findOne(myquery, (err, result) => {
-     if (err) throw err;
-     console.log(res, result)
-     res.json(result);
-   });
-});
- 
-resourceRoutes.route("/resource/add").post((req, response) => {
+
+// Add a resource.
+resourceRoutes.route("/resource/add").post((req, res) => {
   let db_connect = dbo.getDb();
   let myobj = {
     title: req.body.title,
@@ -36,14 +25,18 @@ resourceRoutes.route("/resource/add").post((req, response) => {
     views: req.body.views, 
     date: req.body.date
   };
-  db_connect.collection("resources").insertOne(myobj, (err, res) => {
-    if (err) throw err;
-    response.json(res);
-  });
+  db_connect
+    .collection("resources")
+    .insertOne(myobj)
+    .toArray()
+    .then(data => {
+      res.json(data);
+  })
 });
- 
+
+/* Update a resource.
 resourceRoutes.route("/update/:id").post((req, response) => {
- let db_connect = dbo.getDb();
+ let db_connect = dbo.getDb("users");
  let myquery = { _id: ObjectId(req.params.id) };
  let newvalues = {
    $set: {
@@ -62,7 +55,9 @@ resourceRoutes.route("/update/:id").post((req, response) => {
      response.json(res);
    });
 });
- 
+*/
+
+/* Delete a resource.
 resourceRoutes.route("/:id").delete((req, response) => {
  let db_connect = dbo.getDb();
  let myquery = { _id: ObjectId(req.params.id) };
@@ -72,5 +67,6 @@ resourceRoutes.route("/:id").delete((req, response) => {
    response.json(obj);
  });
 });
+*/
  
 module.exports = resourceRoutes;

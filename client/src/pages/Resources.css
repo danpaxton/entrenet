@@ -2,7 +2,14 @@
     background: whitesmoke;
     display: flex;
     flex-direction: column;
-    justify-content: left;
+    overflow-y: scroll;
+}
+
+.resource-display {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    height: 90vh;
+    border-bottom: solid lightgray;
 }
 
 .resource-header {
@@ -18,7 +25,6 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    justify-content: left;
     gap: 10px;
 }
 
