@@ -141,7 +141,7 @@ const Resources = ({ login, admin }) => {
                             </Box>
                             }
                             <Backdrop onDoubleClick={closeResource} open={viewResource && resourceId === e._id} className="resource-backdrop">
-                                <ResourceView id={i} closeResource={closeResource} editable={editable} resource={e} />
+                                <ResourceView closeResource={closeResource} editable={editable} resource={e} />
                             </Backdrop>
                         </Box>
                     )}

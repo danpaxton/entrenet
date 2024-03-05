@@ -1,24 +1,30 @@
-import { useRef } from 'react';
+import { useState } from 'react';
+import { useAutosave } from 'react-autosave';
 import { Editor } from '@tinymce/tinymce-react';
 
+import { api } from '../App';
+
 const ResourceEditor = ({ setSaved, resource }) => {
-  const editorRef = useRef(null);
-  const saveResource = () => {
-    if (editorRef.current) {
-      setSaved(false);
-      resource.data = editorRef.current.getContent();
-      console.log(resource);
-      setSaved(true);
-    }
+  const [text, setText] = useState(null);
+
+  const saveResource = async (text) => {
+    await api.post(`/update/${resource._id}`, {...resource, data: text});
+    setSaved(true);
   };
+
+  const handleChange = (newValue, editor) => {
+    setSaved(false);
+    setText(newValue);
+  };
+
+  useAutosave({ data: text, onSave: saveResource});
+
   return (
     <>
       <Editor
         apiKey="j5j03cv3b4fs3ehd53fcxgds9xrm7ntj9k00hac9qwjpuz6h"
-        onInit={(evt, editor) => editorRef.current = editor}
-        initialValue={resource.data}
-        onKeyDown={saveResource}
-        selector=".tinydiv"
+        onEditorChange={handleChange}
+        value={text || resource.data}
         init={{
             selector: 'textarea#open-source-plugins',
             plugins: 'preview paste importcss searchreplace autolink directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists imagetools textpattern noneditable charmap quickbars emoticons',

@@ -1,7 +1,7 @@
 ## Current tasks
 ### Front-end
 
-Dan - Front/Back end, setup Id functionality for front end and backend.
+Dan - Front/Back end, I need to create functionality to delete a resource.
 
 ### Back-end
 Initial set up.

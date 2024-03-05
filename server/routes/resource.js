@@ -36,7 +36,7 @@ resourceRoutes.route("/resource/add").post((req, res) => {
 
 resourceRoutes.route("/update/:id").post((req, res) => {
  let db_connect = dbo.getDb("users");
- let myquery = { _id: ObjectId(req.params.id) };
+ let myquery = { _id: req.body._id };
  let newvalues = {
    $set: {
       title: req.body.title,

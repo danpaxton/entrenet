@@ -1,12 +1,14 @@
 import { Box, IconButton } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ResourceEditor from './ResourceEditor';
+import ResourceNoEdit from './ResourceNoEdit'
 import {useState} from 'react'
 
 import './ResourceView.css';
 
 const ResourceView =  ({ resource, closeResource, editable }) => {
     const [saved, setSaved] = useState(true);
+
     return (
         <Box className="editor">
             <Box className="editor-header">
@@ -22,8 +24,8 @@ const ResourceView =  ({ resource, closeResource, editable }) => {
                 </Box>
             </Box>
             <Box className="editor-box">
-                {editable ? <ResourceEditor setSaved={setSaved} resource={resource} />
-                 : null }
+                { editable ? <ResourceEditor setSaved={setSaved} resource={resource} />
+                    : <ResourceNoEdit resource={resource}/> }
             </Box>
         </Box>
     );
