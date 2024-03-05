@@ -5,7 +5,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import { api } from '../App';
 
 const ResourceEditor = ({ setSaved, resource }) => {
-  const [text, setText] = useState(null);
+  const [text, setText] = useState("");
 
   const saveResource = async (text) => {
     await api.post(`/update/${resource._id}`, {...resource, data: text});
@@ -17,7 +17,7 @@ const ResourceEditor = ({ setSaved, resource }) => {
     setText(newValue);
   };
 
-  useAutosave({ data: text, onSave: saveResource});
+  useAutosave({ data: text || resource.data, onSave: saveResource});
 
   return (
     <>
