@@ -1,6 +1,5 @@
 const express = require("express");
 const dbo = require("../db/conn");
-const ObjectId = require("mongodb").ObjectId;
 const resourceRoutes = express.Router();
  
 // Fetch all resources.
@@ -28,42 +27,34 @@ resourceRoutes.route("/resource/add").post((req, res) => {
   db_connect
     .collection("resources")
     .insertOne(myobj)
-    .toArray()
     .then(data => {
       res.json(data);
   })
 });
 
-resourceRoutes.route("/update/:id").post((req, res) => {
- let db_connect = dbo.getDb("users");
- let myquery = { _id: req.body._id };
- let newvalues = {
-   $set: {
-      title: req.body.title,
-      data: req.body.data, 
-      likes: req.body.likes, 
-      views: req.body.views, 
-      date: req.body.date
-   },
- };
- db_connect
-   .collection("resources")
-   .updateOne(myquery, newvalues)
-   .then(data => {
-     res.json(data);
-   });
-});
-
-/* Delete a resource.
-resourceRoutes.route("/:id").delete((req, response) => {
- let db_connect = dbo.getDb();
- let myquery = { _id: ObjectId(req.params.id) };
- db_connect.collection("resources").deleteOne(myquery, (err, obj) => {
-   if (err) throw err;
-   console.log("1 resource deleted");
-   response.json(obj);
+resourceRoutes.route("/resource/update").post((req, res) => {
+  let db_connect = dbo.getDb();
+  let myquery = { title: req.body.title };
+  let newvalues = {
+    $set: { data: req.body.data },
+  };
+  db_connect
+    .collection("resources")
+    .updateOne(myquery, newvalues)
+    .then(data => {
+      res.json(data);
+    });
  });
+
+resourceRoutes.route("/resource/delete").post((req, res) => {
+ let db_connect = dbo.getDb();
+ let myquery = { title: req.body.title };
+ db_connect
+  .collection("resources")
+  .deleteOne(myquery)
+  .then(data => {
+      res.json(data);
+  });
 });
-*/
  
 module.exports = resourceRoutes;

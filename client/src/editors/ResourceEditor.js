@@ -8,8 +8,12 @@ const ResourceEditor = ({ setSaved, resource }) => {
   const [text, setText] = useState("");
 
   const saveResource = async (text) => {
-    await api.post(`/update/${resource._id}`, {...resource, data: text});
-    setSaved(true);
+    try {
+      await api.post('/resource/update', { title: resource.title, data: text } );
+      setSaved(true);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const handleChange = (newValue, editor) => {
@@ -26,7 +30,6 @@ const ResourceEditor = ({ setSaved, resource }) => {
         onEditorChange={handleChange}
         value={text || resource.data}
         init={{
-            selector: 'textarea#open-source-plugins',
             plugins: 'preview paste importcss searchreplace autolink directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists imagetools textpattern noneditable charmap quickbars emoticons',
             imagetools_cors_hosts: ['picsum.photos'],
             menubar: 'edit view insert format tools table help',
