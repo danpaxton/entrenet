@@ -11,7 +11,7 @@ module.exports = {
       console.error(e);
     }
     
-    _db = client.db("users");
+    _db = client.db("entrenet");
     return (_db === undefined ? false : true);
   },
   getDb: () => {

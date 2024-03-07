@@ -1,25 +1,26 @@
 import './Navbar.css'
 import { useState } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom"
-import { Box, IconButton, Menu, MenuItem, ListItemIcon } from '@mui/material'
+import { Box, IconButton, Menu, MenuItem, ListItemIcon, Tabs, Tab } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AccountBox from '@mui/icons-material/AccountCircle';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import logo from '../logo.png';
 
-const pages = ["/", "/about", "/resources", "/forums", "/contact"];
+const pages = ["/", "/about", "/resources", "/forums", "/contact", 'login'];
 
 const pageNames = ["home", "about", "resources", "forums", "contact"];
 
-const Navbar = ({ login, setLogin }) => {
+
+const Navbar = ({ login, setLogin, tabValue, setTabValue }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const navigate = useNavigate()
-    const location = useLocation();
     const open = Boolean(anchorEl);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
+        setTabValue('')
     };
 
     const handleClose = () => {
@@ -36,25 +37,26 @@ const Navbar = ({ login, setLogin }) => {
         handleNav('/login')()
     };
 
-    const handleTabStyle = (page) => {
-        return page === location.pathname ? "active tab" : "unactive tab";
-    }
+    const handleTabChange = (event, newValue) => {
+        setTabValue(newValue);
+        navigate(newValue);
+    };
 
     return (
         <Box color="secondary" className="nav-bar">
             <Box className="nav-menu">
                 <img className="logo" src={logo} alt="EntreNet" />
-                {pages.map((page, i) =>
-                    <NavLink key={i} to={page} className={handleTabStyle(page)}>
-                        {pageNames[i]}
-                    </NavLink>
-                )}
+                <Tabs value={tabValue} onChange={handleTabChange} textColor="secondary" indicatorColor='primary'>
+                    {pages.map((page, i) =>
+                        <Tab sx={{ color: "white"}} key={i} label={pageNames[i]} value={page}/>
+                    )}
+                </Tabs>
             </Box>
             <Box className="profile">
                 {login.token ?
                     <IconButton onClick={handleClick}>
                         <AccountCircleIcon className="active" fontSize='large' />
-                    </IconButton> : <NavLink to="/login" className="login-item">LOGIN</NavLink>
+                    </IconButton> : <NavLink onClick={handleClick} to="/login" className="login-item">SIGN UP</NavLink>
                 }
             </Box>
             <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>

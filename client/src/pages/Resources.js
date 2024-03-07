@@ -44,9 +44,8 @@ const Resources = ({ login, admin }) => {
 
     // Create a new resource
     const newResource = async title => {
-        try {
+        try {   
             await api.post('/resource/add', Resource(title))
-            fetchResources();
         } catch(err) {
             console.log(err);
         }
@@ -56,7 +55,6 @@ const Resources = ({ login, admin }) => {
     const deleteResource = async title => {
         try {
             await api.post('/resource/delete', { title : title } )
-            fetchResources();
         } catch(err) {
             console.log(err);
         }
@@ -179,21 +177,21 @@ const Resources = ({ login, admin }) => {
                     Delete resource
                     <DialogActions className="resource-new">
                         <TextField label={titleLabel} error={titleError} variant="standard" onChange={handleResourceTitleChange}/>
-                        <Box className="resource-new-buttons">
-                            <IconButton onClick={handleDeleteResource}><CheckIcon size="small"/></IconButton>
-                            <IconButton onClick={handleCloseResource}><CloseIcon size="small"/></IconButton>
-                        </Box>
+                        <IconButton onClick={handleDeleteResource}><CheckIcon size="small"/></IconButton>
+                        <IconButton onClick={handleCloseResource}><CloseIcon size="small"/></IconButton>
                     </DialogActions> 
                 </Box>
             </Dialog>
             <Box className="resource-display">
-                <Box className="resource-header"> <IconButton onClick={handleOpenNewResource} sx={{ padding: '0px'}}><AddIcon/></IconButton>
-                    <IconButton onClick={handleOpenDeleteResource} sx={{ padding: '0px'}}><RemoveIcon/></IconButton>
-                </Box>
+                 { admin ?
+                    <Box className="resource-header"> <IconButton onClick={handleOpenNewResource} sx={{ padding: '0px'}}><AddIcon/></IconButton>
+                        <IconButton onClick={handleOpenDeleteResource} sx={{ padding: '0px'}}><RemoveIcon/></IconButton>
+                    </Box> 
+                    : null }
                 <List className="resource-list">
                     {resources.map((e, i) =>
                         <Box className="resource-item" key={i}>
-                            <Box className="resource-title" onClick={() => loadResource(e)} >{e.title}
+                            <Box className="resource-title" color="primary" onClick={() => loadResource(e)} >{e.title}
                                 <Box className="resource-date">{formatDate(e.date)}</Box>
                             </Box>
                             { viewResource ? null :
@@ -205,7 +203,7 @@ const Resources = ({ login, admin }) => {
                                 <Box className="resource-view">{e.views}<VisibilityIcon/></Box>
                             </Box>
                             }
-                            <Backdrop onDoubleClick={closeResource} open={viewResource && resourceId === e._id} className="resource-backdrop">
+                            <Backdrop open={viewResource && resourceId === e._id} className="resource-backdrop">
                                 <ResourceView closeResource={closeResource} editable={editable} resource={e} />
                             </Backdrop>
                         </Box>

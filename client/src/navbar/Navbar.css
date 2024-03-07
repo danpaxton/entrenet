@@ -27,7 +27,7 @@
 }
 
 .active {
-    color: lightblue;
+    color: lightskyblue;
 }
 
 .unactive {
@@ -41,7 +41,6 @@
     cursor: pointer;
     padding: 10px;
     border-radius: 5px;
-    border: solid white;
 }
 
 .profile-nav {
@@ -67,12 +66,4 @@
 .user-email {
     font-size: small;
     color: gray;
-}
-
-.profile-icon:hover, .nav-item:hover, .login-item:hover {
-    color: gray;
-}
-
-.login-item:hover {
-    border: solid gray
 }

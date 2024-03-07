@@ -43,12 +43,16 @@
 .resource-title {
     display: flex;
     justify-content: space-between;
-    color: darkblue;
+    color: black;
     font-size: x-large;
     font-weight: bolder;
     cursor: pointer;
     white-space: nowrap;
     overflow: hidden;
+}
+
+.resource-title:hover {
+    color: darkgray
 }
 
 .resource-cd {
@@ -76,13 +80,8 @@
 }
 
 .resource-new {
-    display: flex;
-}
-
-.resource-new-buttons {
-    display: flex;
-    justify-content: space-around;
-    gap: 10px;
+   display: flex;
+   align-items: center;
 }
 
 .resource-backdrop {
