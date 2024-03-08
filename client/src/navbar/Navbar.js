@@ -18,10 +18,14 @@ const Navbar = ({ login, setLogin, tabValue, setTabValue }) => {
     const navigate = useNavigate()
     const open = Boolean(anchorEl);
 
-    const handleClick = (event) => {
+    const handleProfileClick = (event) => {
         setAnchorEl(event.currentTarget);
         setTabValue('')
     };
+
+    const handleSignUpClick = () => {
+        setTabValue('')
+    }
 
     const handleClose = () => {
         setAnchorEl(null);
@@ -54,9 +58,9 @@ const Navbar = ({ login, setLogin, tabValue, setTabValue }) => {
             </Box>
             <Box className="profile">
                 {login.token ?
-                    <IconButton onClick={handleClick}>
-                        <AccountCircleIcon className="active" fontSize='large' />
-                    </IconButton> : <NavLink onClick={handleClick} to="/login" className="login-item">SIGN UP</NavLink>
+                    <IconButton onClick={handleProfileClick}>
+                        <AccountCircleIcon className="account-button" fontSize='large' />
+                    </IconButton> : <NavLink onClick={handleSignUpClick} to="/login" className="login-button">SIGN UP</NavLink>
                 }
             </Box>
             <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>

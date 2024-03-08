@@ -204,7 +204,7 @@ const Resources = ({ login, admin }) => {
                             </Box>
                             }
                             <Backdrop open={viewResource && resourceId === e._id} className="resource-backdrop">
-                                <ResourceView closeResource={closeResource} editable={editable} resource={e} />
+                                <ResourceView handleLike={handleLike} closeResource={closeResource} editable={editable} resource={e} />
                             </Backdrop>
                         </Box>
                     )}

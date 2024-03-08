@@ -26,15 +26,11 @@
     text-transform: uppercase;
 }
 
-.active {
-    color: lightskyblue;
-}
-
-.unactive {
+.account-button {
     color: white;
 }
 
-.login-item {
+.login-button {
     color: white;
     font-weight: bold;
     text-decoration: none;
