@@ -1,7 +1,7 @@
 import './Navbar.css'
 import { useState } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom"
-import { Box, IconButton, Menu, MenuItem, ListItemIcon, Tabs, Tab } from '@mui/material'
+import { Box, Button,  IconButton, Menu, MenuItem, ListItemIcon, Tabs, Tab } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AccountBox from '@mui/icons-material/AccountCircle';
 import Settings from '@mui/icons-material/Settings';
@@ -13,17 +13,18 @@ const pages = ["/", "/about", "/resources", "/forums", "/contact", 'login'];
 const pageNames = ["home", "about", "resources", "forums", "contact"];
 
 
-const Navbar = ({ login, setLogin, tabValue, setTabValue }) => {
+const Navbar = ({ removeCookie, login, setLogin, tabValue, setTabValue }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const navigate = useNavigate()
     const open = Boolean(anchorEl);
 
     const handleProfileClick = (event) => {
         setAnchorEl(event.currentTarget);
-        setTabValue('')
+        setTabValue('');
     };
 
     const handleSignUpClick = () => {
+        navigate('/login');
         setTabValue('')
     }
 
@@ -37,15 +38,17 @@ const Navbar = ({ login, setLogin, tabValue, setTabValue }) => {
     };
 
     const handleLogout = () => {
-        setLogin({ first: "", last: "", username: "", token: "" });
-        handleNav('/login')()
+        setLogin({ admin: false, logged: false, first: "", last: "", email:"", username: "" });
+        removeCookie("token");
+        setAnchorEl(null);
+        navigate('/login');
     };
 
     const handleTabChange = (event, newValue) => {
         setTabValue(newValue);
         navigate(newValue);
     };
-
+    
     return (
         <Box color="secondary" className="nav-bar">
             <Box className="nav-menu">
@@ -57,10 +60,10 @@ const Navbar = ({ login, setLogin, tabValue, setTabValue }) => {
                 </Tabs>
             </Box>
             <Box className="profile">
-                {login.token ?
+                {login.logged ?
                     <IconButton onClick={handleProfileClick}>
                         <AccountCircleIcon className="account-button" fontSize='large' />
-                    </IconButton> : <NavLink onClick={handleSignUpClick} to="/login" className="login-button">SIGN UP</NavLink>
+                    </IconButton> : <Button onClick={handleSignUpClick} variant='outlined' color="secondary">SIGN UP</Button>
                 }
             </Box>
             <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>

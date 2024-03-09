@@ -1,21 +1,21 @@
-const express = require("express");
 const dbo = require("../db/conn");
-const resourceRoutes = express.Router();
+const { ObjectId } = require("mongodb");
+const resourceRoutes = require("express").Router();
  
 // Fetch all resources.
-resourceRoutes.route("/resources").get((req, res) => {
+resourceRoutes.route("/resources").get(async (req, res) => {
  let db_connect = dbo.getDb();
  db_connect
    .collection("resources")
    .find({})
    .toArray()
    .then(data => {
-     res.json(data);
+     return res.json(data);
    });
 });
 
 // Add a resource.
-resourceRoutes.route("/resource/add").post((req, res) => {
+resourceRoutes.route("/resource/add").post(async (req, res) => {
   let db_connect = dbo.getDb();
   let myobj = {
     title: req.body.title,
@@ -28,13 +28,13 @@ resourceRoutes.route("/resource/add").post((req, res) => {
     .collection("resources")
     .insertOne(myobj)
     .then(data => {
-      res.json(data);
+      return res.json(data);
   })
 });
 
-resourceRoutes.route("/resource/update").post((req, res) => {
+resourceRoutes.route("/resource/update").post(async (req, res) => {
   let db_connect = dbo.getDb();
-  let myquery = { title: req.body.title };
+  let myquery = { _id: new ObjectId(req.body.id) };
   let newvalues = {
     $set: { data: req.body.data },
   };
@@ -42,18 +42,18 @@ resourceRoutes.route("/resource/update").post((req, res) => {
     .collection("resources")
     .updateOne(myquery, newvalues)
     .then(data => {
-      res.json(data);
+      return res.json(data);
     });
  });
 
-resourceRoutes.route("/resource/delete").post((req, res) => {
+resourceRoutes.route("/resource/delete").post(async (req, res) => {
  let db_connect = dbo.getDb();
- let myquery = { title: req.body.title };
+ let myquery = { _id: new ObjectId(req.body._id) };
  db_connect
   .collection("resources")
   .deleteOne(myquery)
   .then(data => {
-      res.json(data);
+      return res.json(data);
   });
 });
  

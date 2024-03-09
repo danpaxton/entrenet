@@ -21,7 +21,7 @@ const Resource = (title = "") => ({
     date: new Date() 
 });
 
-const Resources = ({ login, admin }) => {
+const Resources = ({ login }) => {
     const [resourceId, setResourceId] = useState(null);
     const [resources, setResources] = useState([]);
     const [viewResource, setViewResource] = useState(false);
@@ -35,7 +35,7 @@ const Resources = ({ login, admin }) => {
     // Fetch all resources.
     const fetchResources = async () => {
         try {
-            const { data } = await api.get('/resources');
+            const { data } = await api.get('/resources', { withCredentials: true } );
             setResources(data);
         } catch(err) {
             console.log(err);
@@ -45,7 +45,7 @@ const Resources = ({ login, admin }) => {
     // Create a new resource
     const newResource = async title => {
         try {   
-            await api.post('/resource/add', Resource(title))
+            await api.post('/resource/add', Resource(title), { withCredentials: true } );
         } catch(err) {
             console.log(err);
         }
@@ -54,7 +54,7 @@ const Resources = ({ login, admin }) => {
     // Create a new resource
     const deleteResource = async title => {
         try {
-            await api.post('/resource/delete', { title : title } )
+            await api.post('/resource/delete', { title : title }, { withCredentials: true } );
         } catch(err) {
             console.log(err);
         }
@@ -183,7 +183,7 @@ const Resources = ({ login, admin }) => {
                 </Box>
             </Dialog>
             <Box className="resource-display">
-                 { admin ?
+                 { login.admin ?
                     <Box className="resource-header"> <IconButton onClick={handleOpenNewResource} sx={{ padding: '0px'}}><AddIcon/></IconButton>
                         <IconButton onClick={handleOpenDeleteResource} sx={{ padding: '0px'}}><RemoveIcon/></IconButton>
                     </Box> 
@@ -198,7 +198,7 @@ const Resources = ({ login, admin }) => {
                             <Box className="resource-stats">
                                 <Box className="resource-like-edit">
                                     <IconButton onClick={() => handleLike(e)}><ThumbUpAltIcon/></IconButton>{e.likes}
-                                    { admin ? <IconButton onClick={() => handleEdit(e)}><EditIcon size="small"/></IconButton> : null }
+                                    { login.admin ? <IconButton onClick={() => handleEdit(e)}><EditIcon size="small"/></IconButton> : null }
                                 </Box>
                                 <Box className="resource-view">{e.views}<VisibilityIcon/></Box>
                             </Box>

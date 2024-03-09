@@ -6,12 +6,12 @@ body  {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
 }
 
 .contact {
     display: flex;
     flex-direction: column;
+    margin-top: 5%;
     width: 450px;
     border-radius: 5px;
     padding: 10px;
@@ -31,12 +31,14 @@ body  {
 
 .contact-label {
     font-size: small;
+    width: 100%;
     padding-bottom: 5px;
 }
 
 .contact-name {
     display: flex;
     justify-content: space-between;
+    width: 100%;
     gap: 10px;
     padding-bottom: 5px;
 }
@@ -46,16 +48,19 @@ body  {
     flex-direction: column;
     justify-content: space-evenly;
     border-bottom: solid lightgray;
+    width: 100%;
     padding-bottom: 10px;
 }
 
 .subject-padding {
+    width: 100%;
     padding-top: 5px;
     padding-bottom: 10px;
 }
 
 .message-padding {
     padding-bottom: 10px;
+    width: 100%;
 }
 
 .contact-text {

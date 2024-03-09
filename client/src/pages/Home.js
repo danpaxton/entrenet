@@ -1,5 +1,5 @@
 import { Box, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom"
 import "./Home.css";
 
 const Home = ({ setTabValue }) => {
@@ -9,6 +9,7 @@ const Home = ({ setTabValue }) => {
         setTabValue('/resources');
         navigate('/resources')
     }
+
     return (
         <Box className="home-page">
             <Box className="entrenet-header">Welcome to EntreNet.</Box>

@@ -9,7 +9,7 @@ const ResourceEditor = ({ setSaved, resource }) => {
 
   const saveResource = async (text) => {
     try {
-      await api.post('/resource/update', { title: resource.title, data: text } );
+      await api.post('/resource/update', { id: resource._id, data: text } );
       setSaved(true);
     } catch (e) {
       console.log(e);

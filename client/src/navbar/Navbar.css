@@ -30,15 +30,6 @@
     color: white;
 }
 
-.login-button {
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 5px;
-}
-
 .profile-nav {
     color: black;
     text-decoration: none;

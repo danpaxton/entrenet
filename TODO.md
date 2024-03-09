@@ -1,7 +1,7 @@
 ## Current tasks
 ### Front-end
 
-Dan - Front/Back end, I need to create functionality to delete a resource.
+Dan - Front/Back end, I need to create functionality to like and view resources. I need to keep track of which users like each post and need to keep track of the resource view count.
 
 ### Back-end
 Initial set up.
