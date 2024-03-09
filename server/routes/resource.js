@@ -48,7 +48,7 @@ resourceRoutes.route("/resource/update").post(async (req, res) => {
 
 resourceRoutes.route("/resource/delete").post(async (req, res) => {
  let db_connect = dbo.getDb();
- let myquery = { _id: new ObjectId(req.body._id) };
+ let myquery = { title: req.body.title };
  db_connect
   .collection("resources")
   .deleteOne(myquery)

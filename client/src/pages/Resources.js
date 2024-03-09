@@ -54,7 +54,7 @@ const Resources = ({ login }) => {
     // Create a new resource
     const deleteResource = async title => {
         try {
-            await api.post('/resource/delete', { title : title }, { withCredentials: true } );
+            await api.post('/resource/delete', { title }, { withCredentials: true } );
         } catch(err) {
             console.log(err);
         }
