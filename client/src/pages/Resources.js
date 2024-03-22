@@ -1,51 +1,52 @@
-import { Backdrop, Box, IconButton, List, Dialog, DialogActions, TextField } from '@mui/material';
+import { Backdrop, Box, InputLabel, IconButton, List, 
+    Dialog, DialogActions, TextField, Select, MenuItem, FormControl } from '@mui/material';
 import ResourceView from '../editors/ResourceView';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import EditIcon from '@mui/icons-material/Edit';
-
-
-import { useEffect, useState } from 'react';
+import SearchIcon from '@mui/icons-material/Search';
+import ScrollToBottom from 'react-scroll-to-bottom';
+import { useState, useEffect } from 'react';
 import { api } from '../App';
 import "./Resources.css";
 
 const Resource = (title = "") => ({ 
     title, 
     data: "", 
-    likes: 0, 
-    views: 0, 
+    views: [],
     date: new Date() 
 });
 
-const Resources = ({ login }) => {
+const Resources = ({ sortDate, login, resources, setResources, formatDate }) => {
     const [resourceId, setResourceId] = useState(null);
-    const [resources, setResources] = useState([]);
     const [viewResource, setViewResource] = useState(false);
     const [openNewResource, setOpenNewResource] = useState(false);
     const [openDeleteResource, setOpenDeleteResource] = useState(false);
+    const [filter, setFilter] = useState('date')
     const [editable, setEditable] = useState(false);
     const [resourceTitle, setResourceTitle] = useState("");
     const [titleError, setTitleError] = useState(false);
-    const [titleLabel, setTitleLabel] = useState("Enter file name.")
+    const [titleLabel, setTitleLabel] = useState("Enter title")
+    const [searchText, setSearchText] = useState("")
 
-    // Fetch all resources.
+    // Fetch resources.
     const fetchResources = async () => {
-        try {
-            const { data } = await api.get('/resources', { withCredentials: true } );
-            setResources(data);
-        } catch(err) {
-            console.log(err);
-        }
+      try {
+          const { data } = await api.get('/resources');
+          setResources(data);
+      } catch(err) {
+          console.log(err);
+      }
     };
 
     // Create a new resource
     const newResource = async title => {
         try {   
-            await api.post('/resource/add', Resource(title), { withCredentials: true } );
+            await api.post('/resource/add', Resource(title));
+            fetchResources();
         } catch(err) {
             console.log(err);
         }
@@ -54,7 +55,28 @@ const Resources = ({ login }) => {
     // Create a new resource
     const deleteResource = async title => {
         try {
-            await api.post('/resource/delete', { title }, { withCredentials: true } );
+            await api.post('/resource/delete', { title });
+            fetchResources();
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
+    const updateResourceViews = async data => {
+        try {
+            if (login.logged) {
+                let viewed = false;
+                for (let user of data.views) {
+                    if (user === login.email) {
+                        viewed = true;
+                        break;
+                    }
+                }
+                if (!viewed) {
+                    await api.post('/resource/update/views', { id: data._id, email: login.email, views: data.views });
+                    fetchResources();
+                }
+            }
         } catch(err) {
             console.log(err);
         }
@@ -76,6 +98,7 @@ const Resources = ({ login }) => {
     };
 
     const loadResource = data => {
+        updateResourceViews(data)
         setResourceId(data._id);
         setViewResource(true);
     };
@@ -88,7 +111,7 @@ const Resources = ({ login }) => {
 
     const handleCloseResource = () => {
         setTitleError(false);
-        setTitleLabel("Enter file name.");
+        setTitleLabel("Enter title");
         setOpenNewResource(false);
         setOpenDeleteResource(false);
         setResourceTitle("");
@@ -97,10 +120,10 @@ const Resources = ({ login }) => {
     const handleNewResource = () => {
         if (resourceTitle.length > 65) {
             setTitleError(true);
-            setTitleLabel("Maximum title length.");
+            setTitleLabel("Maximum title length");
         } else {
             setTitleError(false);
-            setTitleLabel("Enter file name.");
+            setTitleLabel("Enter title");
             const title = resourceTitle.trim();
             const r = findResource(title);
             if (!r) {
@@ -108,7 +131,7 @@ const Resources = ({ login }) => {
                 handleCloseResource();
             } else {
                 setTitleError(true);
-                setTitleLabel("File already exists.");
+                setTitleLabel("Already exists");
             }
         }
     };
@@ -116,10 +139,10 @@ const Resources = ({ login }) => {
     const handleDeleteResource = () => {
         if (resourceTitle.length > 65) {
             setTitleError(true);
-            setTitleLabel("Maximum title length.");
+            setTitleLabel("Maximum title length");
         } else {
             setTitleError(false);
-            setTitleLabel("Enter file name.");
+            setTitleLabel("Enter title");
             const title = resourceTitle.trim();
             const r = findResource(title);
             if (r) {
@@ -127,7 +150,7 @@ const Resources = ({ login }) => {
                 handleCloseResource();
             } else {
                 setTitleError(true);
-                setTitleLabel("File does not exist.");
+                setTitleLabel("Does not exist");
             }
         }
     };
@@ -143,26 +166,47 @@ const Resources = ({ login }) => {
     const handleResourceTitleChange = f => {
         setResourceTitle(f.target.value);
     };
-    
-    const handleLike = data => {
-        data.likes += 1;
+
+    const handleSearchChange = f => {
+        setSearchText(f.target.value);
     };
 
-    const formatDate = date => {
-        const d = new Date(date);
-        return d.getUTCMonth() + "/" + d.getUTCDate() + "/" + d.getUTCFullYear().toString().slice(2, 4)
+    const handleFilterChange = event => {
+        setFilter(event.target.value)
     };
-    
-    // Fetch resources on render.
+
+    const sortViews = (a, b) => {
+        if (a.views < b.views) {
+            return 1;
+        }
+        if (a.views > b.views) {
+            return -1;
+        }
+        return 0
+    };
+
+    const searchFilter = data => {
+        if (searchText) {
+            for (let i = 0; i < searchText.length; i++) {
+                if (data.title[i] !== searchText[i]) {
+                    return false;
+                }
+            }
+
+        }
+        return true;
+    }
+
+     // Fetch resources on render.
     useEffect(() => {
         fetchResources();
-    });
-
+    }, [setResources]);
+    
     return (
         <Box className="resource-page">
              <Dialog open={openNewResource}>
                 <Box className="resource-cd">
-                    New resource
+                    Create resource
                     <DialogActions className="resource-new">
                         <TextField label={titleLabel} error={titleError} variant="standard" onChange={handleResourceTitleChange}/>
                         <Box className="resource-new-buttons">
@@ -182,34 +226,47 @@ const Resources = ({ login }) => {
                     </DialogActions> 
                 </Box>
             </Dialog>
-            <Box className="resource-display">
-                 { login.admin ?
-                    <Box className="resource-header"> <IconButton onClick={handleOpenNewResource} sx={{ padding: '0px'}}><AddIcon/></IconButton>
-                        <IconButton onClick={handleOpenDeleteResource} sx={{ padding: '0px'}}><RemoveIcon/></IconButton>
-                    </Box> 
-                    : null }
-                <List className="resource-list">
-                    {resources.map((e, i) =>
-                        <Box className="resource-item" key={i}>
-                            <Box className="resource-title" color="primary" onClick={() => loadResource(e)} >{e.title}
-                                <Box className="resource-date">{formatDate(e.date)}</Box>
+                    <Box className="resource-header">
+                        <SearchIcon/>
+                        <TextField className='resource-search' size='small' variant="outlined" label={ !viewResource ? "Enter title" : null}  onChange={handleSearchChange}></TextField>
+                        <FormControl className='resource-filter' size='small'>
+                            { !viewResource ? <InputLabel id="filter-select">Filter</InputLabel> : null }
+                            <Select
+                                labelId="filter-select"
+                                value={filter}
+                                label="Filter"
+                                onChange={handleFilterChange}
+                                >
+                                <MenuItem value={'date'}>Date</MenuItem>
+                                <MenuItem value={'views'}>Views</MenuItem>
+                            </Select>
+                        </FormControl>
+                        { login.admin ? 
+                            <Box>
+                                <IconButton onClick={handleOpenNewResource}><AddIcon/></IconButton>
+                                <IconButton onClick={handleOpenDeleteResource}><RemoveIcon/></IconButton>
                             </Box>
-                            { viewResource ? null :
-                            <Box className="resource-stats">
-                                <Box className="resource-like-edit">
-                                    <IconButton onClick={() => handleLike(e)}><ThumbUpAltIcon/></IconButton>{e.likes}
-                                    { login.admin ? <IconButton onClick={() => handleEdit(e)}><EditIcon size="small"/></IconButton> : null }
+                            : null }
+                    </Box>
+                <ScrollToBottom mode='top' className='resource-scroll'>
+                    <List className="resource-list">
+                        {resources.filter(searchFilter).sort(filter === 'views' ? sortViews : sortDate).map((e, i) =>
+                            <Box className="resource-item" key={i}>
+                                <Box className="resource-title" color="primary" onClick={() => loadResource(e)} >{e.title}<></></Box>
+                                <Box className="resource-stats">
+                                    { login.admin && !viewResource ? 
+                                        <IconButton sx={{ padding: '0px'}} onClick={() => handleEdit(e)}><EditIcon/></IconButton>
+                                        : null }
+                                    <Box className="resource-view">{e.views.length}<VisibilityIcon/></Box>
+                                    <Box className="resource-date">{formatDate(e.date)}</Box>
                                 </Box>
-                                <Box className="resource-view">{e.views}<VisibilityIcon/></Box>
+                                <Backdrop open={viewResource && resourceId === e._id} className="resource-backdrop">
+                                    <ResourceView fetchResources={fetchResources} closeResource={closeResource} editable={editable} resource={e} />
+                                </Backdrop>
                             </Box>
-                            }
-                            <Backdrop open={viewResource && resourceId === e._id} className="resource-backdrop">
-                                <ResourceView handleLike={handleLike} closeResource={closeResource} editable={editable} resource={e} />
-                            </Backdrop>
-                        </Box>
-                    )}
-                </List>
-            </Box>
+                        )}
+                    </List>
+                </ScrollToBottom>
         </Box> 
     );
 };

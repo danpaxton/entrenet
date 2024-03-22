@@ -18,3 +18,16 @@ Install dependencies and run client. To install npm visit https://github.com/nvm
 npm install
 npm run start
 ```
+
+## Server
+Rrun the server from the command line.
+
+Navigate to directory.
+```
+cd entrenet/server
+```
+
+Install dependencies and run client. To install npm visit https://github.com/nvm-sh/nvm#installing-and-updating
+```
+npm install
+npm run start

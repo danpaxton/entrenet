@@ -22,6 +22,7 @@ userRoutes.route("/signup").post(async (req, res) => {
         email: req.body.email,
         first: req.body.first,
         last: req.body.last,
+        bookmarks: [],
         password: await bcrypt.hash(req.body.password, 12)
      };
     db_connect

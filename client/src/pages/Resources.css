@@ -2,38 +2,37 @@
     background: whitesmoke;
     display: flex;
     flex-direction: column;
-    overflow-y: scroll;
-}
-
-.resource-display {
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-    height: 90vh;
-    border-bottom: solid lightgray;
 }
 
 .resource-header {
     display: flex;
-    justify-content: center;
-    gap: 20px;
-    font-size: large;
-    padding-top: 10px;
-    width: 100%;
+    justify-content: left;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: solid lightgray;
+    background: white;
+}
+
+.resource-scroll {
+    display: flex;
+    flex-direction: column;
+    scroll-behavior: smooth;
+    height: calc(100vh - 150px);
+    border-bottom: solid lightgray;
 }
 
 .resource-list {
     display: flex;
     flex-direction: column;
-    width: 100%;
     gap: 10px;
 }
 
 .resource-item {
     display: flex;
-    flex-direction: column;
-    align-items: left;
-    margin-left: 10%;
     margin-right: 10%;
+    margin-left: 10%;
+    align-items: center;
     border-radius: 5px;
     border: solid lightgray;
     background: white;
@@ -41,6 +40,7 @@
 }
 
 .resource-title {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     color: black;
@@ -66,17 +66,16 @@
 
 .resource-stats {
     display: flex;
-    justify-content: space-between;
-    color: gray;
-}
-
-.resource-like, .resource-view {
-    display: flex;
     align-items: center;
+    color: gray;
+    font-size: medium;
+    gap:10px
 }
 
 .resource-view {
-    gap: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .resource-new {
@@ -89,8 +88,16 @@
 }
 
 .resource-date {
-    color: gray;
     font-weight: normal;
-    font-size: small;
     font-style: italic;
+}
+
+.resource-filter {
+    width: 100px;
+    background: whitesmoke;
+}
+
+.resource-search {
+    background: whitesmoke;
+    width: 200px
 }

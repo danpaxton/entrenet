@@ -1,7 +1,7 @@
 ## Current tasks
 ### Front-end
 
-Dan - Front/Back end, I need to create functionality to like and view resources. I need to keep track of which users like each post and need to keep track of the resource view count.
+Dan - Front/Back end, implement the ability to add more to ventures and skills.
 
 ### Back-end
 Initial set up.

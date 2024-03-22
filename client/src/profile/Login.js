@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from "react-router-dom"
 import { Box, TextField, Button } from '@mui/material'
 import { api } from '../App';
 import './Login.css'
  
-const Login = ({ login, setLogin, cookies, removeCookie }) => {
+const Login = ({ login, setLogin }) => {
     const [password, setPassword] = useState("");
     const [signUpError, setSignUpError] = useState(false);
     const [signUp, setSignUp] = useState(true)
@@ -12,8 +12,7 @@ const Login = ({ login, setLogin, cookies, removeCookie }) => {
 
     const handleSignUp = async () => {
         try {
-            const { data } = await api.post('/signup', {...login, password }, { withCredentials: true});
-            console.log(data);
+            const { data } = await api.post('/signup', {...login, password });
             if (data.success) {
                 setLogin(data.user);
                 navigate('/');
@@ -28,8 +27,7 @@ const Login = ({ login, setLogin, cookies, removeCookie }) => {
     
     const handleLogin = async () => {
         try {
-            const { data } = await api.post('/login', { email: login.email, password }, { withCredentials: true });
-            console.log(data);
+            const { data } = await api.post('/login', { email: login.email, password });
             if (data.success) {
                 setLogin(data.user);
                 navigate('/');
@@ -53,20 +51,6 @@ const Login = ({ login, setLogin, cookies, removeCookie }) => {
     const changeLoginButtons = () => {
         setSignUp(!signUp);
     };
-
-    
-    useEffect(() => {
-        if (!cookies.token) {
-            navigate("/login");
-        }
-        const data = api.get("/", { withCredentials: true });
-        if (data.status) {
-            setLogin(data.user);
-        } else {
-            removeCookie("token");
-            navigate("/login");
-        }
-    }, [cookies, navigate, removeCookie])
 
     return (
         <Box className="login-page">

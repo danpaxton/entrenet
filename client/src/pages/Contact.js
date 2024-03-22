@@ -21,7 +21,7 @@ const Contact = ({ login }) => {
                 </Box>
                 <Box className="message-padding">
                     <Box className="contact-label">Comments</Box>
-                    <TextField className='contact-text' multiline fullWidth rows={5}></TextField>    
+                    <TextField className='contact-text' multiline fullWidth rows={10}></TextField>    
                 </Box>
                 <Button variant='contained'>
                     Submit

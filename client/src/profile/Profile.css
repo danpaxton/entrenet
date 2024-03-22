@@ -1,0 +1,46 @@
+.profile-page {
+    background: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 2.5%;
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+    border-bottom: solid gray;
+}
+.profile-name {
+    color: black;
+    font-size: x-large;
+    font-weight: bolder;
+}
+
+.profile-email {
+    font-size: gray;
+    font-size: large;
+    font-weight: normal;
+}
+
+.profile-textbox {
+    border: solid gray;
+    background: whitesmoke;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.profile-connections {
+    display: flex;
+    align-items: center;
+    font-size: large;
+}
+
+.profile-conn-number {
+    padding-right: 5px;
+    font-weight: bold;
+
+}

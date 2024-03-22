@@ -1,21 +1,23 @@
 import './Navbar.css'
-import { useState } from "react";
-import { NavLink, useNavigate, useLocation } from "react-router-dom"
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation  } from "react-router-dom"
 import { Box, Button,  IconButton, Menu, MenuItem, ListItemIcon, Tabs, Tab } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AccountBox from '@mui/icons-material/AccountCircle';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import logo from '../logo.png';
+import { api } from '../App';
 
-const pages = ["/", "/about", "/resources", "/forums", "/contact", 'login'];
+const pages = ["/", "/about", "/resources", "/forums", "/contact"];
 
 const pageNames = ["home", "about", "resources", "forums", "contact"];
 
 
-const Navbar = ({ removeCookie, login, setLogin, tabValue, setTabValue }) => {
+const Navbar = ({ cookies, removeCookie, login, setLogin, tabValue, setTabValue }) => {
     const [anchorEl, setAnchorEl] = useState(null);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const location = useLocation();
     const open = Boolean(anchorEl);
 
     const handleProfileClick = (event) => {
@@ -38,24 +40,39 @@ const Navbar = ({ removeCookie, login, setLogin, tabValue, setTabValue }) => {
     };
 
     const handleLogout = () => {
+        setAnchorEl(null);
         setLogin({ admin: false, logged: false, first: "", last: "", email:"", username: "" });
         removeCookie("token");
-        setAnchorEl(null);
-        navigate('/login');
+        handleSignUpClick();
     };
 
     const handleTabChange = (event, newValue) => {
-        setTabValue(newValue);
-        navigate(newValue);
+        if (login.logged) navigate(newValue);
     };
     
+    useEffect(() => {
+        if (!cookies.token) {
+            handleSignUpClick();
+        }
+        api.get("/").then(({ data }) => {
+            if (data.status) {
+                setLogin(data.user);
+                setTabValue(location.pathname);
+            } else {
+                removeCookie("token");
+                navigate("/login");
+                setTabValue('');
+            }
+        });
+    }, [cookies, navigate, removeCookie])
+
     return (
         <Box color="secondary" className="nav-bar">
             <Box className="nav-menu">
-                <img className="logo" src={logo} alt="EntreNet" />
-                <Tabs value={tabValue} onChange={handleTabChange} textColor="secondary" indicatorColor='primary'>
+                <img className="logo" src={logo} alt="EntreNet"/>
+                <Tabs value={tabValue} onChange={handleTabChange} textColor='secondary' indicatorColor='primary'>
                     {pages.map((page, i) =>
-                        <Tab sx={{ color: "white"}} key={i} label={pageNames[i]} value={page}/>
+                        <Tab sx={{ color: !login.logged ? 'gray' : 'white' }} key={i} label={pageNames[i]} value={page}/>
                     )}
                 </Tabs>
             </Box>

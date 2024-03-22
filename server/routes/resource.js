@@ -20,7 +20,6 @@ resourceRoutes.route("/resource/add").post(async (req, res) => {
   let myobj = {
     title: req.body.title,
     data: req.body.data, 
-    likes: req.body.likes, 
     views: req.body.views, 
     date: req.body.date
   };
@@ -32,11 +31,29 @@ resourceRoutes.route("/resource/add").post(async (req, res) => {
   })
 });
 
-resourceRoutes.route("/resource/update").post(async (req, res) => {
+resourceRoutes.route("/resource/update/text").post(async (req, res) => {
   let db_connect = dbo.getDb();
   let myquery = { _id: new ObjectId(req.body.id) };
   let newvalues = {
-    $set: { data: req.body.data },
+    $set: { 
+      data: req.body.text,
+    },
+  };
+  db_connect
+    .collection("resources")
+    .updateOne(myquery, newvalues)
+    .then(data => {
+      return res.json(data);
+    });
+ });
+
+resourceRoutes.route("/resource/update/views").post(async (req, res) => {
+  let db_connect = dbo.getDb();
+  let myquery = { _id: new ObjectId(req.body.id) };
+  let views = req.body.views;
+  views.push(req.body.email);
+  let newvalues = {
+    $set: { views },
   };
   db_connect
     .collection("resources")

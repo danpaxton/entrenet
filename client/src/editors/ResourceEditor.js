@@ -4,12 +4,13 @@ import { Editor } from '@tinymce/tinymce-react';
 
 import { api } from '../App';
 
-const ResourceEditor = ({ setSaved, resource }) => {
+const ResourceEditor = ({ setSaved, resource, fetchResources }) => {
   const [text, setText] = useState("");
 
   const saveResource = async (text) => {
     try {
-      await api.post('/resource/update', { id: resource._id, data: text } );
+      await api.post('/resource/update/text', { id: resource._id, text });
+      fetchResources();
       setSaved(true);
     } catch (e) {
       console.log(e);
