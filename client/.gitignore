@@ -3,3 +3,6 @@
 
 # production
 /build
+
+# contactjs config variables
+.env
