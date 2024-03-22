@@ -27,33 +27,6 @@ const Contact = ({ login }) => {
             );
     };
     return (
-<<<<<<< HEAD
-        <Box className="contact-page">
-            <Box className="contact-header">Contact Us</Box>
-            <Box className="contact">
-                <Box className="contact-info">
-                    <Box className="contact-label">Name</Box>
-                    <Box className="contact-name">
-                        <TextField className='contact-text' defaultValue={login.first} placeholder={"First"} fullWidth size='small'></TextField>
-                        <TextField className='contact-text' defaultValue={login.last} placeholder={"Last"} fullWidth size='small'></TextField>
-                    </Box>
-                    <Box className="contact-label">E-mail</Box>
-                    <TextField className='contact-text' defaultValue={login.email} fullWidth size='small'></TextField>
-                </Box>
-                <Box className="subject-padding">
-                    <Box className="contact-label">Subject</Box>
-                    <TextField className='contact-text' fullWidth size='small'></TextField>
-                </Box>
-                <Box className="message-padding">
-                    <Box className="contact-label">Comments</Box>
-                    <TextField className='contact-text' multiline fullWidth rows={10}></TextField>    
-                </Box>
-                <Button variant='contained'>
-                    Submit
-                </Button>
-            </Box>
-        </Box>
-=======
         // <Box className="contact-page">
         //     <Box className="contact-header">Contact Us</Box>
         //     <Box className="contact">
@@ -91,7 +64,6 @@ const Contact = ({ login }) => {
             </form>
         </div>
 
->>>>>>> 73d10a706a1cdcaa889df2eed6c797fdfb25bbf6
     );
 };
 
