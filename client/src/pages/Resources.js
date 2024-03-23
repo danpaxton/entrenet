@@ -124,7 +124,7 @@ const Resources = ({ sortDate, login, resources, setResources, formatDate }) => 
         } else {
             setTitleError(false);
             setTitleLabel("Enter title");
-            const title = resourceTitle.trim();
+            const title = resourceTitle.split(/[ ]+/).join(' ');
             const r = findResource(title);
             if (!r) {
                 newResource(title);
@@ -186,9 +186,10 @@ const Resources = ({ sortDate, login, resources, setResources, formatDate }) => 
     };
 
     const searchFilter = data => {
-        if (searchText) {
-            for (let i = 0; i < searchText.length; i++) {
-                if (data.title[i] !== searchText[i]) {
+        let text = searchText.toLowerCase();
+        if (text) {
+            for (let i = 0; i < text.length; i++) {
+                if (data.title[i] !== text[i]) {
                     return false;
                 }
             }
