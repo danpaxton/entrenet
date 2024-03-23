@@ -1,7 +1,7 @@
 ## Current tasks
 ### Front-end
 
-Dan - Front/Back end, implement the ability to add more to ventures and skills.
+Dan - Profile.js, implement the ability to add more to ventures and skills.
 
 ### Back-end
 Initial set up.
