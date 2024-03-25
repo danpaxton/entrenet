@@ -84,7 +84,7 @@ const Resources = ({ sortDate, login, resources, setResources, formatDate }) => 
 
     const findResource = (title) => {
         for (const r of resources) {
-            if (r.title.toUpperCase() === title.toUpperCase()) {
+            if (r.title === title) {
                 return r
             }
         }
@@ -124,7 +124,7 @@ const Resources = ({ sortDate, login, resources, setResources, formatDate }) => 
         } else {
             setTitleError(false);
             setTitleLabel("Enter title");
-            const title = resourceTitle.split(/[ ]+/).join(' ');
+            const title = resourceTitle.trim().split(/\s+/).join(' ').toLowerCase();
             const r = findResource(title);
             if (!r) {
                 newResource(title);
@@ -143,7 +143,7 @@ const Resources = ({ sortDate, login, resources, setResources, formatDate }) => 
         } else {
             setTitleError(false);
             setTitleLabel("Enter title");
-            const title = resourceTitle.trim();
+            const title = resourceTitle.trim().toLowerCase();
             const r = findResource(title);
             if (r) {
                 deleteResource(title);
